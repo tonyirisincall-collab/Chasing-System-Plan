@@ -30,7 +30,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
 .prog-fill{height:100%;background:var(--accent);box-shadow:0 0 8px var(--glow);transition:width 0.65s var(--ease-out);}
 
 .slides{position:fixed;inset:0 0 76px 0;z-index:10;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 48px;gap:0;opacity:0;pointer-events:none;transform:translateY(52px) scale(0.97);transition:opacity 0.55s var(--ease-spring),transform 0.55s var(--ease-spring);}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 40px;gap:0;opacity:0;pointer-events:none;transform:translateY(52px) scale(0.97);transition:opacity 0.55s var(--ease-spring),transform 0.55s var(--ease-spring);}
 .slide.active{opacity:1;transform:none;pointer-events:all;}
 .slide.exit{opacity:0;transform:translateY(-36px) scale(0.97);transition:opacity 0.32s ease,transform 0.32s ease;}
 
@@ -105,6 +105,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
 .age-status{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:1px;}
 .age-desc{font-size:11.5px;color:var(--muted);line-height:1.55;}
 .age-desc strong{color:var(--text);font-weight:700;}
+
+/* Tier row styles */
+.tier-row{display:grid;grid-template-columns:1fr 80px 60px 24px;gap:4px;align-items:center;padding:4px 6px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);}
+.tier-input{background:transparent;border:none;color:var(--text);font-size:11px;font-family:'DM Sans',sans-serif;outline:none;width:100%;padding:1px 2px;}
+.tier-conv{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--accent);text-align:center;background:transparent;border:none;outline:none;width:100%;padding:1px 2px;}
+.tier-dos{font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:var(--accent2);text-align:center;}
+.tier-del{width:20px;height:20px;border-radius:4px;border:none;background:rgba(224,96,128,0.15);color:#e06080;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.tier-del:hover{background:rgba(224,96,128,0.35);}
 </style>
 </head>
 <body>
@@ -122,8 +130,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
     <span class="tag">JR Chaser — Month 1-3</span>
     <span class="tag">Chaser — 20 DOs</span>
     <span class="tag">SR Chaser — 30 DOs</span>
-    <span class="tag">70-80 leads / agent</span>
-    <span class="tag">15-20 agents</span>
+    <span class="tag">75 leads / agent</span>
+    <span class="tag">45-day cycle</span>
   </div>
   <div class="fu" style="margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);text-align:center;">
     Chasing Team · Liberty Medical Supplies · ICO
@@ -142,7 +150,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
       <div style="display:flex;flex-direction:column;gap:5px;">
         <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">1 · Morning Review</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">Open all leads. Who needs follow-up today? Who's hitting Day 8 tomorrow? Prioritize before calling.</div></div>
         <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">2 · Calls & Faxes</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">Start with oldest leads first (Day 6+). Each active lead gets a focused call. Log result immediately after each call.</div></div>
-        <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">3 · TL Check-In</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">Mandatory daily session. Present every stuck lead. TL listens to first 3 calls per week. Mistakes are caught early here.</div></div>
+        <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">3 · TL Check-In</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">Mandatory daily session. Present every stuck lead. TL listens to 2-4 calls per chaser per day. Mistakes caught early.</div></div>
         <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">4 · Log & End-of-Day Plan</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">All calls logged: date, result, next step. Check who hits Warning tomorrow. Come in ready — not starting from zero.</div></div>
       </div>
     </div>
@@ -150,7 +158,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#5a90e8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Chaser — Daily Structure</div>
       <div style="display:flex;flex-direction:column;gap:5px;">
         <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">1 · Priority Sort</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">Who's Day 7+? Who needs a second fax? Who is approaching Warning? Sort by urgency before starting.</div></div>
-        <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">2 · Follow-Up Calls</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">~3.6 active leads per day on average (80 ÷ 22 days). Give each lead focused, quality time. Not just a call — a result.</div></div>
+        <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">2 · Follow-Up Calls</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">~3.4 active leads per day (75 ÷ 22 days). Give each lead focused, quality time. Not just a call — a result.</div></div>
         <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">3 · New Lead Faxes</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">Day 1-3 leads: call + fax + log on the same day. Never push to tomorrow. Aging starts from day one.</div></div>
         <div style="padding:6px 9px;border-radius:7px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:11px;font-weight:700;color:var(--text);">4 · Log & Close-Day Plan</div><div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.5;">Update every lead: result, next follow-up date, current status. Check who hits Warning and any incoming DOs.</div></div>
       </div>
@@ -178,8 +186,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
   <div class="fu g4" style="margin-top:14px;">
     <div class="stat-card">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Leads</div>
-      <div class="stat-num count-up" data-target="70">0</div><div class="stat-unit">– 80 leads / agent</div>
-      <div class="stat-label">Assigned per month</div>
+      <div class="stat-num count-up" data-target="75">0</div><div class="stat-unit">leads / agent</div>
+      <div class="stat-label">Assigned per 30-day window</div>
     </div>
     <div class="stat-card">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">JR Chaser</div>
@@ -215,7 +223,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
         <div class="role-badge" style="background:rgba(200,176,128,0.15);border:1.5px solid rgba(200,176,128,0.4);color:#c8b080;font-size:11px;width:38px;height:38px;">JR</div>
         <div><div class="role-title" style="font-size:13px;">JR Chaser</div><div style="font-size:9.5px;color:var(--muted);">Month 1 → 3 &middot; Just started</div></div>
       </div>
-      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:var(--faint);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em;">Conv% → DOs (80 leads)</div>
+      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:var(--faint);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em;">Conv% → DOs (75 leads)</div>
       <div class="conv-row"><span style="color:var(--muted);font-size:11px;">Month 1 — Start</span><div><span class="conv-dos" style="font-size:14px;">8</span><span class="conv-pct">–10 DOs</span></div></div>
       <div class="conv-row"><span style="color:var(--muted);font-size:11px;">Month 2 — Improving</span><div><span class="conv-dos" style="font-size:14px;">10</span><span class="conv-pct">–13 DOs</span></div></div>
       <div class="conv-row" style="border-bottom:none;"><span style="color:var(--text);font-weight:600;font-size:11px;">Month 3 — Max</span><div><span class="conv-dos" style="color:var(--accent2);font-size:14px;">16</span><span class="conv-pct">DOs</span></div></div>
@@ -226,11 +234,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
         <div class="role-badge" style="background:rgba(90,144,232,0.15);border:1.5px solid rgba(90,144,232,0.5);color:#5a90e8;font-size:11px;width:38px;height:38px;">CH</div>
         <div><div class="role-title" style="font-size:13px;">Chaser</div><div style="font-size:9.5px;color:var(--muted);">Month 3+ &middot; Standard agent</div></div>
       </div>
-      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:var(--faint);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em;">Conv% → DOs (80 leads)</div>
-      <div class="conv-row"><span style="color:var(--muted);font-size:11px;">20% — Minimum</span><div><span class="conv-dos" style="font-size:14px;">16</span><span class="conv-pct">DOs</span></div></div>
-      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">25% — Target</span><div><span class="conv-dos" style="color:var(--accent2);font-size:14px;">20</span><span class="conv-pct">DOs</span></div></div>
-      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">30% — Good</span><div><span class="conv-dos" style="font-size:14px;">24</span><span class="conv-pct">DOs</span></div></div>
-      <div class="conv-row" style="border-bottom:none;"><span style="color:var(--accent);font-weight:700;font-size:11px;">40% — Elite Max</span><div><span class="conv-dos" style="color:var(--accent);font-size:14px;">32</span><span class="conv-pct">DOs</span></div></div>
+      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:var(--faint);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em;">Conv% → DOs (75 leads)</div>
+      <div class="conv-row"><span style="color:var(--muted);font-size:11px;">20% — Minimum</span><div><span class="conv-dos" style="font-size:14px;">15</span><span class="conv-pct">DOs</span></div></div>
+      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">25% — Target</span><div><span class="conv-dos" style="color:var(--accent2);font-size:14px;">19</span><span class="conv-pct">DOs</span></div></div>
+      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">30% — Good</span><div><span class="conv-dos" style="font-size:14px;">23</span><span class="conv-pct">DOs</span></div></div>
+      <div class="conv-row" style="border-bottom:none;"><span style="color:var(--accent);font-weight:700;font-size:11px;">40% — Elite Max</span><div><span class="conv-dos" style="color:var(--accent);font-size:14px;">30</span><span class="conv-pct">DOs</span></div></div>
       <div style="margin-top:8px;padding:7px 9px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);font-size:10px;color:var(--muted);line-height:1.6;">Independent. Manages own leads. Below 20% = immediate coaching.</div>
     </div>
     <div class="role-card" style="border-color:rgba(94,200,122,0.45);background:rgba(94,200,122,0.04);">
@@ -238,12 +246,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
         <div class="role-badge" style="background:rgba(94,200,122,0.15);border:1.5px solid rgba(94,200,122,0.5);color:#5ec87a;font-size:11px;width:38px;height:38px;">SR</div>
         <div><div class="role-title" style="font-size:13px;">SR Chaser</div><div style="font-size:9.5px;color:var(--muted);">6 months – 1 year &middot; Expert</div></div>
       </div>
-      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:var(--faint);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em;">Conv% → DOs (80 leads)</div>
-      <div class="conv-row"><span style="color:var(--muted);font-size:11px;">25% — Minimum</span><div><span class="conv-dos" style="font-size:14px;">20</span><span class="conv-pct">DOs</span></div></div>
-      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">30% — Target</span><div><span class="conv-dos" style="color:var(--accent2);font-size:14px;">24</span><span class="conv-pct">DOs</span></div></div>
-      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">37.5% — 30 DOs</span><div><span class="conv-dos" style="font-size:14px;">30</span><span class="conv-pct">DOs</span></div></div>
-      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">45% — Elite+</span><div><span class="conv-dos" style="font-size:14px;">36</span><span class="conv-pct">DOs</span></div></div>
-      <div class="conv-row" style="border-bottom:none;"><span style="color:var(--accent);font-weight:700;font-size:11px;">50% — SR Max</span><div><span class="conv-dos" style="color:var(--accent);font-size:14px;">40</span><span class="conv-pct">DOs</span></div></div>
+      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:var(--faint);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em;">Conv% → DOs (75 leads)</div>
+      <div class="conv-row"><span style="color:var(--muted);font-size:11px;">25% — Minimum</span><div><span class="conv-dos" style="font-size:14px;">19</span><span class="conv-pct">DOs</span></div></div>
+      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">30% — Target</span><div><span class="conv-dos" style="color:var(--accent2);font-size:14px;">23</span><span class="conv-pct">DOs</span></div></div>
+      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">35% — SR Tier 1</span><div><span class="conv-dos" style="font-size:14px;">26</span><span class="conv-pct">DOs</span></div></div>
+      <div class="conv-row"><span style="color:var(--text);font-weight:600;font-size:11px;">40% — 30 DOs</span><div><span class="conv-dos" style="font-size:14px;">30</span><span class="conv-pct">DOs</span></div></div>
+      <div class="conv-row" style="border-bottom:none;"><span style="color:var(--accent);font-weight:700;font-size:11px;">50% — SR Max</span><div><span class="conv-dos" style="color:var(--accent);font-size:14px;">38</span><span class="conv-pct">DOs</span></div></div>
       <div style="margin-top:8px;padding:7px 9px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);font-size:10px;color:var(--muted);line-height:1.6;">Takes harder leads. Helps train JR. Below 25% = urgent review.</div>
     </div>
   </div>
@@ -252,50 +260,64 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
   </div>
 </div>
 
-<!-- ══ SLIDE 5 — TEAM TARGETS ══ -->
+<!-- ══ SLIDE 5 — TEAM TARGETS (FLEXIBLE TIERS) ══ -->
 <div class="slide" data-theme="sand">
   <div class="fu slide-label">Monthly Team Target</div>
   <div class="fu headline">The Numbers<br/><span class="hl">We're Building Toward</span></div>
-  <div class="fu" style="width:100%;max-width:940px;margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-    <div style="padding:14px 16px;border-radius:14px;background:var(--surface2);border:1px solid rgba(200,176,128,0.3);">
-      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">JR Chaser — Scenarios</div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:10px;">80 leads &middot; Progressive month by month</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px 8px;font-size:11px;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">Month</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">conv%</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">Month 1</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">10–12%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:700;color:var(--text);">8–10</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">Month 2</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">13–16%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:700;color:var(--accent2);">10–13</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:600;">Month 3</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:600;">20%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:900;color:var(--accent);">16</div>
+
+  <div class="fu" style="display:flex;align-items:center;gap:14px;margin-top:8px;padding:10px 18px;border-radius:10px;background:var(--surface);border:1px solid var(--border);width:100%;max-width:960px;flex-wrap:wrap;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;">Leads / Agent</div>
+    <input type="number" id="s5-leads" value="75" min="1" max="200" oninput="calcS5()" style="width:72px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent);outline:none;text-align:center;"/>
+    <div style="font-size:10px;color:var(--muted);flex:1;">Change leads — all tables update instantly. Add or remove tiers freely per role.</div>
+  </div>
+
+  <div class="fu" style="width:100%;max-width:960px;margin-top:8px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;overflow-y:auto;max-height:calc(100vh - 270px);">
+    <!-- JR -->
+    <div style="padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid rgba(200,176,128,0.3);">
+      <div style="font-size:9px;font-family:'IBM Plex Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">JR Chaser</div>
+      <div style="font-size:9px;color:var(--muted);margin-bottom:8px;">Progressive · Month 1→3</div>
+      <div style="display:grid;grid-template-columns:1fr 64px 44px 24px;gap:3px 4px;margin-bottom:4px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">Label</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">DOs</div>
+        <div></div>
       </div>
-      <div style="margin-top:10px;font-size:9.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;">Below 8 DOs in month 1 = intensive training</div>
+      <div id="s5-jr-tiers" style="display:flex;flex-direction:column;gap:3px;"></div>
+      <button onclick="addTierRow('jr')" style="margin-top:6px;width:100%;padding:4px;border-radius:6px;border:1px dashed rgba(200,176,128,0.35);background:transparent;color:var(--accent);font-size:9px;cursor:pointer;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;transition:background 0.2s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='transparent'">+ Add Tier</button>
+      <div style="margin-top:5px;font-size:8.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;">Below 8 DOs month 1 = intensive training</div>
     </div>
-    <div style="padding:14px 16px;border-radius:14px;background:var(--surface2);border:1px solid rgba(90,144,232,0.35);">
-      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:#5a90e8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Chaser — Scenarios</div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:10px;">80 leads &middot; Month 3+</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px 8px;font-size:11px;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">Level</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">conv%</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">Minimum</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">20%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:700;color:var(--text);">16</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:600;">Target</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:600;">25%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:900;color:var(--accent2);">20</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">Good</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">30%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:700;color:var(--text);">24</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--accent);font-weight:700;">Elite Max</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--accent);font-weight:700;">40%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:900;color:var(--accent);">32</div>
+    <!-- CHASER -->
+    <div style="padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid rgba(90,144,232,0.35);">
+      <div style="font-size:9px;font-family:'IBM Plex Mono',monospace;color:#5a90e8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Chaser</div>
+      <div style="font-size:9px;color:var(--muted);margin-bottom:8px;">Month 3+</div>
+      <div style="display:grid;grid-template-columns:1fr 64px 44px 24px;gap:3px 4px;margin-bottom:4px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">Label</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">DOs</div>
+        <div></div>
       </div>
-      <div style="margin-top:10px;font-size:9.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;">Below 20% = immediate coaching</div>
+      <div id="s5-ch-tiers" style="display:flex;flex-direction:column;gap:3px;"></div>
+      <button onclick="addTierRow('ch')" style="margin-top:6px;width:100%;padding:4px;border-radius:6px;border:1px dashed rgba(90,144,232,0.35);background:transparent;color:#5a90e8;font-size:9px;cursor:pointer;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;transition:background 0.2s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='transparent'">+ Add Tier</button>
+      <div style="margin-top:5px;font-size:8.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;">Below 20% = immediate coaching</div>
     </div>
-    <div style="padding:14px 16px;border-radius:14px;background:rgba(94,200,122,0.03);border:1px solid rgba(94,200,122,0.4);">
-      <div style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;color:#5ec87a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">SR Chaser — Scenarios</div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:10px;">80 leads &middot; 6 months+</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px 8px;font-size:11px;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">Level</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">conv%</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">Minimum</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">25%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:700;color:var(--text);">20</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:600;">Target</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--text);font-weight:600;">30%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:900;color:var(--accent2);">24</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">30 DOs</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">37.5%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:700;color:var(--text);">30</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">Elite+</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted);">45%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:700;color:var(--text);">36</div>
-        <div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--accent);font-weight:700;">SR Max</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);color:var(--accent);font-weight:700;">50%</div><div style="padding:3px 0;border-top:1px solid rgba(255,255,255,0.06);font-weight:900;color:var(--accent);">40</div>
+    <!-- SR -->
+    <div style="padding:12px 14px;border-radius:14px;background:rgba(94,200,122,0.03);border:1px solid rgba(94,200,122,0.4);">
+      <div style="font-size:9px;font-family:'IBM Plex Mono',monospace;color:#5ec87a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">SR Chaser</div>
+      <div style="font-size:9px;color:var(--muted);margin-bottom:8px;">6 months+</div>
+      <div style="display:grid;grid-template-columns:1fr 64px 44px 24px;gap:3px 4px;margin-bottom:4px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">Label</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">DOs</div>
+        <div></div>
       </div>
-      <div style="margin-top:10px;font-size:9.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;">Below 25% = urgent review with TL</div>
+      <div id="s5-sr-tiers" style="display:flex;flex-direction:column;gap:3px;"></div>
+      <button onclick="addTierRow('sr')" style="margin-top:6px;width:100%;padding:4px;border-radius:6px;border:1px dashed rgba(94,200,122,0.35);background:transparent;color:#5ec87a;font-size:9px;cursor:pointer;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;transition:background 0.2s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='transparent'">+ Add Tier</button>
+      <div style="margin-top:5px;font-size:8.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;">Below 25% = urgent review with TL</div>
     </div>
   </div>
-  <div class="fu" style="font-size:11px;color:var(--muted);margin-top:10px;text-align:center;max-width:780px;line-height:1.7;">
-    Ideal team (15-20 agents): <strong style="color:var(--text);">team goal = 300-400+ DOs/month</strong> depending on the ratio of JR vs Chaser vs SR in the team.
+
+  <div class="fu" style="font-size:10.5px;color:var(--muted);margin-top:8px;text-align:center;max-width:780px;line-height:1.7;">
+    Ideal team (15-20 agents): <strong style="color:var(--text);">team goal = 300-400+ DOs/month</strong> · Tiers are fully editable — add, remove, or adjust any row.
   </div>
 </div>
 
@@ -304,32 +326,31 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
   <div class="fu slide-label">Pipeline</div>
   <div class="fu headline">How a Lead Becomes<br/><span class="hl">a Doctor Order</span></div>
   <div class="fu stack" style="width:100%;max-width:760px;margin-top:18px;gap:7px;">
-    <div class="rule-item"><span class="rule-num">STEP 01</span><span class="rule-text"><strong>Lead arrives</strong> — from Floor or Outsourcing. Pre-qualified: Medicare Part B active, valid NPI, PECOS enrolled, no MSP/HMO.</span></div>
-    <div class="rule-item"><span class="rule-num">STEP 02</span><span class="rule-text"><strong>Assigned to chaser within 24 hours.</strong> Calls doctor's office, confirms patient is active, gets fax number.</span></div>
-    <div class="rule-item"><span class="rule-num">STEP 03</span><span class="rule-text"><strong>Fax sent.</strong> Prior authorization paperwork dispatched. Date and time logged. Confirm receipt if possible.</span></div>
-    <div class="rule-item"><span class="rule-num">STEP 04</span><span class="rule-text"><strong>Follow-up every 2-3 days.</strong> Try different departments after 7 days. Voicemail as last option only.</span></div>
-    <div class="rule-item"><span class="rule-num">STEP 05</span><span class="rule-text"><strong>Obtain DO + Chart Notes.</strong> DO &le; 2 months old &middot; CN &le; 5 months 10 days. Both are required.</span></div>
+    <div class="rule-item"><span class="rule-num">STEP 01</span><span class="rule-text"><strong>Lead arrives</strong> — from Floor or Outsourcing. Pre-qualified internally. Chaser does not see the source — management tracks it separately.</span></div>
+    <div class="rule-item"><span class="rule-num">STEP 02</span><span class="rule-text"><strong>First Touch within 24 hours.</strong> Call doctor's office, confirm mutuality, confirm active patient-doctor relationship. Max delay: 48 hours. Any lead untouched after 48h = red flag.</span></div>
+    <div class="rule-item"><span class="rule-num">STEP 03</span><span class="rule-text"><strong>Fax sent same day</strong> if mutuality confirmed. Prior auth paperwork dispatched. Date and time logged. Confirm receipt.</span></div>
+    <div class="rule-item"><span class="rule-num">STEP 04</span><span class="rule-text"><strong>Follow-up cadence:</strong> FU1 next business day → FU2 48h later → FU3 72h later. After fax: 48h grace between each follow-up. Try different departments after 7 days.</span></div>
+    <div class="rule-item"><span class="rule-num">STEP 05</span><span class="rule-text"><strong>Obtain DO + Chart Notes.</strong> DO &le; 2 months old &middot; CN &le; 5 months 10 days. Both are required. Update sheet status at every step.</span></div>
     <div class="rule-item" style="border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="color:var(--accent);border-color:var(--accent);">RESULT</span><span class="rule-text" style="color:var(--text);"><strong>DO submitted to backend &rarr; client review &rarr; Medicare billing &rarr; revenue.</strong> This is the only step that generates income.</span></div>
   </div>
 </div>
 
-<!-- ══ SLIDE 7 — LEAD AGING ══ -->
+<!-- ══ SLIDE 7 — LEAD AGING (45-DAY CYCLE) ══ -->
 <div class="slide" data-theme="rose">
-  <div class="fu slide-label">Lead Aging System</div>
-  <div class="fu headline">Every Lead Has<br/><span class="hl">30 Days Maximum</span></div>
-  <div class="fu" style="font-size:11.5px;color:var(--muted);margin-bottom:10px;text-align:center;max-width:680px;line-height:1.65;">
-    The full cycle ends at <strong style="color:var(--text);">Day 30</strong>. Idle leads re-assign automatically at Day 14 — the SR takes over with full credit opportunity intact.
+  <div class="fu slide-label">Lead Aging System — 45-Day Cycle</div>
+  <div class="fu headline">Every Lead Has<br/><span class="hl">45 Days Maximum</span></div>
+  <div class="fu" style="font-size:11px;color:var(--muted);margin-bottom:8px;text-align:center;max-width:760px;line-height:1.65;">
+    The full cycle ends at <strong style="color:var(--text);">Day 45</strong>. Day 14 = Early Signal Review · Day 30 = Corrective Review · Day 45 = Final Review. A chaser may request retention past Day 45 if the lead shows genuine potential — TL approval required.
   </div>
-  <div class="fu stack" style="width:100%;max-width:840px;gap:6px;">
-    <div class="age-row"><div><div class="age-days">Day 1–3</div><div class="age-status">FRESH</div></div><div class="age-desc"><strong>Act immediately.</strong> First call + fax within 24 hours. This is your highest-value window. No excuses for delay.</div><span class="tag" style="white-space:nowrap;">1.0 Credit</span></div>
-    <div class="age-row"><div><div class="age-days">Day 4–7</div><div class="age-status">ACTIVE</div></div><div class="age-desc">Normal follow-up every 2-3 days. Agent is waiting for doctor response. Still fully on track.</div><span class="tag" style="white-space:nowrap;">1.0 Credit</span></div>
-    <div class="age-row"><div><div class="age-days">Day 8–13</div><div class="age-status">WARNING</div></div><div class="age-desc"><strong>Flag raised.</strong> TL notified. Agent must report: is there progress? If no update logged by Day 13 end-of-day &rarr; lead auto re-assigns.</div><span class="tag" style="white-space:nowrap;">Warning Flag</span></div>
-    <div class="age-row" style="border-color:rgba(251,146,60,0.5);background:rgba(251,146,60,0.06);"><div><div class="age-days" style="color:#fb923c;">Day 14</div><div class="age-status" style="color:#fb923c;">RE-ASSIGN</div></div><div class="age-desc"><strong style="color:#fb923c;">Lead auto-transferred to SR Chaser.</strong> Agent who held it gets a deduction applied. SR gets the lead fresh with full chance to convert it.</div><span class="tag" style="white-space:nowrap;color:#fb923c;border-color:rgba(251,146,60,0.4);background:rgba(251,146,60,0.1);">Deduction + Transfer</span></div>
-    <div class="age-row"><div><div class="age-days">Day 15–22</div><div class="age-status">SR ACTIVE</div></div><div class="age-desc">SR Chaser works the lead. Tries different doctors, different departments. This is the SR's chance to rescue it and add to their own conv%.</div><span class="tag" style="white-space:nowrap;">SR Owns It</span></div>
-    <div class="age-row" style="border-color:var(--accent);background:var(--surface);"><div><div class="age-days">Day 30</div><div class="age-status">CYCLE END</div></div><div class="age-desc"><strong>Full cycle closes.</strong> If no DO arrived by Day 30 — lead is removed from pipeline. No extensions. The 30-day window is absolute.</div><span class="tag" style="white-space:nowrap;border-color:var(--accent);">Removed</span></div>
-  </div>
-  <div class="fu" style="margin-top:10px;padding:9px 18px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);font-size:11px;color:var(--muted);text-align:center;max-width:840px;line-height:1.6;">
-    <strong style="color:var(--text);">Why Day 14?</strong> After 14 days with no progress, the probability of conversion drops significantly. Re-assigning to the SR preserves the lead's potential while holding the original agent accountable.
+  <div class="fu stack" style="width:100%;max-width:920px;gap:5px;">
+    <div class="age-row"><div><div class="age-days">Day 1–3</div><div class="age-status">FRESH</div></div><div class="age-desc"><strong>Act immediately.</strong> First touch within 24h (max 48h). Call + confirm mutuality + fax same day. Any lead untouched after 48h = red flag raised automatically.</div><span class="tag" style="white-space:nowrap;">1.0 Credit</span></div>
+    <div class="age-row"><div><div class="age-days">Day 4–7</div><div class="age-status">ACTIVE</div></div><div class="age-desc">Normal follow-up cadence every 48-72h. Agent is tracking doctor response. Still fully on track. Log every touch — no undocumented contact.</div><span class="tag" style="white-space:nowrap;">1.0 Credit</span></div>
+    <div class="age-row"><div><div class="age-days">Day 8–13</div><div class="age-status">WARNING</div></div><div class="age-desc"><strong>Flag raised.</strong> TL notified. Agent must report progress. If no logged movement by Day 13 EOD → Day 14 review triggered. Try different department or contact person.</div><span class="tag" style="white-space:nowrap;">Warning Flag</span></div>
+    <div class="age-row" style="border-color:rgba(251,146,60,0.5);background:rgba(251,146,60,0.06);"><div><div class="age-days" style="color:#fb923c;">Day 14</div><div class="age-status" style="color:#fb923c;">EARLY SIGNAL REVIEW</div></div><div class="age-desc"><strong style="color:#fb923c;">TL reviews all Day 14 leads.</strong> If no real progress → lead auto-transferred to SR Chaser with deduction applied to original agent. SR gets full credit opportunity on any DO produced.</div><span class="tag" style="white-space:nowrap;color:#fb923c;border-color:rgba(251,146,60,0.4);background:rgba(251,146,60,0.1);">Transfer / Review</span></div>
+    <div class="age-row"><div><div class="age-days">Day 15–29</div><div class="age-status">SR ACTIVE</div></div><div class="age-desc">SR Chaser works the lead. Tries different doctors, departments, contacts. Management reviews source performance in background. This window is the rescue phase.</div><span class="tag" style="white-space:nowrap;">SR Owns It</span></div>
+    <div class="age-row" style="border-color:rgba(90,144,232,0.5);background:rgba(90,144,232,0.05);"><div><div class="age-days" style="color:#5a90e8;">Day 30</div><div class="age-status" style="color:#5a90e8;">CORRECTIVE REVIEW</div></div><div class="age-desc"><strong style="color:#5a90e8;">Full mid-cycle performance review.</strong> Trend analysis, weak performer identification, TL coaching impact assessed. Leads still alive continue — no forced close at Day 30.</div><span class="tag" style="white-space:nowrap;color:#5a90e8;border-color:rgba(90,144,232,0.4);background:rgba(90,144,232,0.08);">Review Point</span></div>
+    <div class="age-row"><div><div class="age-days">Day 31–44</div><div class="age-status">FINAL PUSH</div></div><div class="age-desc">Last window to convert. SR makes final attempts. Chaser who originally held it may not take it back. Source data recorded for 45-day cycle analysis by management.</div><span class="tag" style="white-space:nowrap;">Final Attempt</span></div>
+    <div class="age-row" style="border-color:var(--accent);background:var(--surface);"><div><div class="age-days">Day 45</div><div class="age-status">FINAL REVIEW</div></div><div class="age-desc"><strong>Full cycle closes.</strong> No DO = lead removed from pipeline. Exception: chaser may request retention if lead shows genuine potential — TL approves case by case. Source scale/reduce decisions made every 45 days by management.</div><span class="tag" style="white-space:nowrap;border-color:var(--accent);">Removed / Exception</span></div>
   </div>
 </div>
 
@@ -358,8 +379,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
   </div>
   <div class="fu" style="margin-top:12px;width:100%;max-width:940px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
     <div style="padding:10px 14px;border-radius:10px;background:var(--surface2);border:1px solid rgba(200,176,128,0.3);font-size:11px;color:var(--muted);line-height:1.65;"><strong style="color:var(--text);">JR Chaser:</strong> Not measured by the same standards as Chaser. Month 1 minimum = 8 DOs. Red flag = below 8.</div>
-    <div style="padding:10px 14px;border-radius:10px;background:var(--surface2);border:1px solid rgba(90,144,232,0.35);font-size:11px;color:var(--muted);line-height:1.65;"><strong style="color:var(--text);">Chaser:</strong> Minimum 20% = 16 DOs. Target 25% = 20 DOs. Below 20% = 2-week PIP.</div>
-    <div style="padding:10px 14px;border-radius:10px;background:rgba(94,200,122,0.03);border:1px solid rgba(94,200,122,0.4);font-size:11px;color:var(--muted);line-height:1.65;"><strong style="color:var(--text);">SR Chaser:</strong> Minimum 25% = 20 DOs. Target 37.5% = 30 DOs. Max 50% = 40 DOs.</div>
+    <div style="padding:10px 14px;border-radius:10px;background:var(--surface2);border:1px solid rgba(90,144,232,0.35);font-size:11px;color:var(--muted);line-height:1.65;"><strong style="color:var(--text);">Chaser:</strong> Minimum 20% = ~15 DOs. Target 25% = ~19 DOs. Below 20% = 14-day PIP.</div>
+    <div style="padding:10px 14px;border-radius:10px;background:rgba(94,200,122,0.03);border:1px solid rgba(94,200,122,0.4);font-size:11px;color:var(--muted);line-height:1.65;"><strong style="color:var(--text);">SR Chaser:</strong> Minimum 25% = ~19 DOs. Target 35% = ~26 DOs. Max 50% = ~38 DOs.</div>
   </div>
 </div>
 
@@ -373,21 +394,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
     <div style="padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);border-right:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(90,144,232,0.9);font-weight:700;">Chaser</div>
     <div style="padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(94,200,122,0.9);font-weight:700;">SR Chaser</div>
     <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-left:3px solid var(--accent);background:var(--surface2);"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);">W1</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:1px;">10–15%</div></div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Receives leads with TL. Reviews every lead with TL before first call. TL listens to first 3 calls.</div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Receives 70-80 leads. Checks: Medicare B + NPI + PECOS. First call + fax per lead. Date logged.</div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Receives own leads + reviews JR hard leads. Identifies high-priority leads from day one. Sets the month plan.</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Receives leads with TL. Reviews every lead with TL before first call. TL listens to 2-4 calls. First touch within 24h mandatory.</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Receives 75 leads. First touch + fax per lead within 24h. Status logged after each action. Day 1 untouched = red flag.</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Receives own leads + reviews JR hard leads. Identifies high-priority leads. Sets the month plan. Reviews Day 14 flags proactively.</div>
     <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-left:3px solid var(--accent);background:var(--surface2);"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);">W2</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:1px;">30–35%</div></div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Supervised follow-up. Reports every doctor response to TL. First DO = celebration + debrief together.</div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Follow-up every 2-3 days. Reviews Day 8+ flags. First DOs arrive from W1. Leaderboard published.</div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Follows up on hard leads + helps JR with Day 8 difficult leads. Brings most DOs this week.</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Supervised follow-up. Reports every doctor response to TL. Day 14 review — stuck leads transferred to SR. First DO = debrief together.</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Follow-up every 48-72h. Day 14 flagged leads reviewed. First DOs arrive. Leaderboard published. No-movement leads escalated.</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Follows up on hard leads + helps JR with Day 8-14 difficult cases. Receives transferred leads from Chasers. Brings most DOs this week.</div>
     <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-left:3px solid var(--accent);background:var(--surface2);"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);">W3</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:1px;">65–70%</div></div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Mid-month review with TL. Stale leads transferred to SR. This month's target: 8-16 DOs.</div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Majority of DOs arrive. Day 15+ leads re-assigned or try different clinic. Review: reached 15 DOs?</div>
-    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Receives stale leads from Chaser. Tries different doctors. Target: 22-30 DOs by end of W3.</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Mid-cycle review with TL. Day 30 corrective review prep. This month's target: 8-16 DOs. Underperformance plan activated if below 75%.</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Majority of DOs arrive. Day 30 review — trend confirmed. Day 30+ leads still live. Review: reached 15 DOs? If not, what's blocking?</div>
+    <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Receives remaining stale leads. Tries different doctors. Day 30 corrective review. Target: 22-30 DOs by end of W3.</div>
     <div style="padding:10px 12px;border-left:3px solid var(--accent);background:var(--surface2);"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);">W4</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:1px;">95–100%</div></div>
-    <div style="padding:10px 12px;border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">TL reviews full month together. Hit target? Ready to promote to Chaser next month?</div>
-    <div style="padding:10px 12px;border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Final push on pending leads before Day 30. Confirm 20 DOs. Calculate bonus. Plan next month.</div>
-    <div style="padding:10px 12px;font-size:10.5px;color:var(--muted);line-height:1.6;">Close all leads. Confirm 30 DOs. Report to TL: which JR is ready for promotion? Plan next month.</div>
+    <div style="padding:10px 12px;border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">TL reviews full month. Hit target? Ready to promote to Chaser? Day 45 final review scheduled. Leads in Day 31-44 still active.</div>
+    <div style="padding:10px 12px;border-right:1px solid rgba(255,255,255,0.06);font-size:10.5px;color:var(--muted);line-height:1.6;">Final push on Day 30-44 leads before Day 45. Confirm 19-20 DOs. Calculate bonus. Plan next cycle. Source decisions pending.</div>
+    <div style="padding:10px 12px;font-size:10.5px;color:var(--muted);line-height:1.6;">Close all 45-day leads. Confirm 26-30 DOs. Day 45 final review: rewards, PIP decisions, source scale decisions, JR promotion readiness.</div>
   </div>
 </div>
 
@@ -402,111 +423,156 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
         <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Monthly Progress Bonus</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Hit the monthly target? Small motivational bonus. Not tied to Chaser standards.</div></div>
         <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Best JR of the Month</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Highest conv% among JRs = public recognition + faster promotion to Chaser.</div></div>
         <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Month 3 — Promotion</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">16 DOs in month 3 = auto-promotion to Chaser + more leads + promotion bonus.</div></div>
+        <div style="padding:7px 10px;border-radius:8px;background:rgba(94,200,122,0.07);border:1px solid rgba(94,200,122,0.25);"><div style="font-size:10.5px;font-weight:700;color:#5ec87a;margin-bottom:3px;">Discipline Bonus</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Lowest neglected leads + best first-touch compliance = discipline reward.</div></div>
         <div style="padding:7px 10px;border-radius:8px;background:rgba(224,96,128,0.07);border:1px solid rgba(224,96,128,0.25);"><div style="font-size:10.5px;font-weight:700;color:#e06080;margin-bottom:3px;">Penalty</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">3 neglected leads = extra intensive training. Not PIP — still learning.</div></div>
       </div>
     </div>
     <div style="padding:14px 16px;border-radius:14px;background:var(--surface2);border:1px solid rgba(90,144,232,0.35);">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#5a90e8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Chaser — Incentives</div>
       <div style="display:flex;flex-direction:column;gap:7px;">
-        <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Bonus / DO above 16</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Every DO above 16 earns a fixed bonus. Target 20 = 4 bonus DOs each month.</div></div>
+        <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Bonus / DO above minimum</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Every DO above the minimum earns a fixed bonus. Target 19-20 DOs = 4-5 bonus DOs each month.</div></div>
         <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Elite Multiplier (40%+)</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Every DO above target at 1.5&times;. 40% is the Chaser max.</div></div>
         <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Team #1</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Highest conv% = bonus &times; 2 + priority leads next month + public recognition.</div></div>
+        <div style="padding:7px 10px;border-radius:8px;background:rgba(94,200,122,0.07);border:1px solid rgba(94,200,122,0.25);"><div style="font-size:10.5px;font-weight:700;color:#5ec87a;margin-bottom:3px;">Discipline Bonus</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Best first-touch compliance + lowest overdue follow-ups = behavior reward.</div></div>
         <div style="padding:7px 10px;border-radius:8px;background:rgba(224,96,128,0.07);border:1px solid rgba(224,96,128,0.25);"><div style="font-size:10.5px;font-weight:700;color:#e06080;margin-bottom:3px;">Penalty</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">3 neglected leads = auto PIP. Below 20% = mandatory coaching + reduced leads.</div></div>
       </div>
     </div>
     <div style="padding:14px 16px;border-radius:14px;background:rgba(94,200,122,0.03);border:1px solid rgba(94,200,122,0.4);">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#5ec87a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">SR Chaser — Incentives</div>
       <div style="display:flex;flex-direction:column;gap:7px;">
-        <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Bonus / DO above 20</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Every DO above 20 earns a bonus. Target 30 = 10 bonus DOs monthly.</div></div>
-        <div style="padding:7px 10px;border-radius:8px;background:rgba(94,200,122,0.08);border:1px solid rgba(94,200,122,0.3);"><div style="font-size:10.5px;font-weight:700;color:#5ec87a;margin-bottom:3px;">SR Elite Multiplier (45-50%)</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">SR hits 45%+ = bonus &times; 1.75. 50% = bonus &times; 2 + top priority leads.</div></div>
+        <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Bonus / DO above 19</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Every DO above 19 earns a bonus. Target 26-30 DOs = 7-11 bonus DOs monthly.</div></div>
+        <div style="padding:7px 10px;border-radius:8px;background:rgba(94,200,122,0.08);border:1px solid rgba(94,200,122,0.3);"><div style="font-size:10.5px;font-weight:700;color:#5ec87a;margin-bottom:3px;">SR Elite Multiplier (45-50%)</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">SR hits 45%+ = bonus &times; 1.75. 50% = bonus &times; 2 + top priority leads. Only SR can reach this bracket.</div></div>
         <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Training Bonus</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">A JR trained by this SR gets promoted = SR earns an extra training bonus.</div></div>
+        <div style="padding:7px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--border);"><div style="font-size:10.5px;font-weight:700;color:var(--text);margin-bottom:3px;">Best Improvement Bonus</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Biggest month-over-month conv% improvement on the team = improvement bonus regardless of absolute rank.</div></div>
         <div style="padding:7px 10px;border-radius:8px;background:rgba(224,96,128,0.07);border:1px solid rgba(224,96,128,0.25);"><div style="font-size:10.5px;font-weight:700;color:#e06080;margin-bottom:3px;">Penalty</div><div style="font-size:10px;color:var(--muted);line-height:1.6;">Below 25% = urgent management review. The SR is not allowed to slip.</div></div>
       </div>
     </div>
   </div>
   <div class="fu" style="width:100%;max-width:960px;margin-top:10px;padding:9px 16px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);font-size:10.5px;color:var(--muted);text-align:center;line-height:1.7;">
-    <strong style="color:var(--text);">Team Bonus:</strong> The whole team hits the collective target = shared bonus distributed to all who met their minimum &middot; <strong style="color:var(--text);">JR:</strong> 8+ &middot; <strong style="color:var(--text);">Chaser:</strong> 16+ &middot; <strong style="color:var(--text);">SR:</strong> 20+
+    <strong style="color:var(--text);">Rewards tied to:</strong> hitting target · exceeding target · best improvement · best discipline score · lowest neglected lead count · best team performance under TL &middot; We reward the behavior that creates sustainable RX volume — not just volume alone.
   </div>
 </div>
 
-<!-- ══ SLIDE 11 — TEAM CALCULATOR ══ -->
+<!-- ══ SLIDE 11 — TEAM CALCULATOR (FLEXIBLE) ══ -->
 <div class="slide" data-theme="sand">
   <div class="fu slide-label">Team Calculator</div>
   <div class="fu headline">Input Your Numbers<br/><span class="hl">Get Instant Targets</span></div>
-  <div class="fu" style="width:100%;max-width:960px;margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <div style="padding:14px 16px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;">Monthly DO Target</div><span class="calc-tip" data-tip="The total number of Doctor Orders you want the whole team to produce this month." style="width:16px;height:16px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span></div>
+  <div class="fu" style="width:100%;max-width:960px;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="display:flex;flex-direction:column;gap:9px;">
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;">Monthly DO Target</div></div>
         <input type="number" id="c-do-target" value="200" min="1" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--accent);outline:none;"/>
       </div>
-      <div style="padding:14px 16px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Number of Agents per Role</div>
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Agents per Role</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-          <div><div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;"><div style="font-size:10px;color:var(--muted);">JR Chasers</div><span class="calc-tip" data-tip="JR Chasers are in months 1-3. Min target: 8 DOs/month (month 1), up to 16 DOs/month (month 3)." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span></div><input type="number" id="c-jr" value="5" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
-          <div><div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;"><div style="font-size:10px;color:var(--muted);">Chasers</div><span class="calc-tip" data-tip="Standard Chasers (month 3+). Min: 16 DOs. Target: 20 DOs. Max: 32 DOs at 40% conv." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span></div><input type="number" id="c-ch" value="7" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
-          <div><div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;"><div style="font-size:10px;color:var(--muted);">SR Chasers</div><span class="calc-tip" data-tip="Senior Chasers (6+ months). Min: 20 DOs. Target: 30 DOs. Max: 40 DOs at 50% conv." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span></div><input type="number" id="c-sr" value="3" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
+          <div><div style="font-size:9px;color:var(--muted);margin-bottom:4px;">JR Chasers</div><input type="number" id="c-jr" value="5" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
+          <div><div style="font-size:9px;color:var(--muted);margin-bottom:4px;">Chasers</div><input type="number" id="c-ch" value="7" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
+          <div><div style="font-size:9px;color:var(--muted);margin-bottom:4px;">SR Chasers</div><input type="number" id="c-sr" value="3" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
         </div>
       </div>
-      <div style="padding:14px 16px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;">Leads per Agent per Month</div><span class="calc-tip" data-tip="How many leads each agent receives monthly. Standard is 70-80." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span></div>
-        <input type="number" id="c-leads" value="80" min="1" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--accent);outline:none;"/>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Leads / Agent</div>
+          <input type="number" id="c-leads" value="75" min="1" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--accent);outline:none;"/>
+        </div>
+        <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">DO Target / Agent</div>
+          <input type="number" id="c-do-agent" value="20" min="1" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--accent2);outline:none;"/>
+        </div>
+      </div>
+      <!-- Required conv% per role -->
+      <div style="padding:10px 14px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);text-transform:uppercase;margin-bottom:7px;">Required Conv% to Hit DO Target per Agent</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+          <div style="text-align:center;padding:6px;background:var(--surface);border-radius:6px;border:1px solid rgba(200,176,128,0.25);"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);margin-bottom:3px;">JR Conv%</div><div id="c-jr-req-conv" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:var(--accent);">—</div></div>
+          <div style="text-align:center;padding:6px;background:var(--surface);border-radius:6px;border:1px solid rgba(90,144,232,0.25);"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);margin-bottom:3px;">Chaser Conv%</div><div id="c-ch-req-conv" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#5a90e8;">—</div></div>
+          <div style="text-align:center;padding:6px;background:var(--surface);border-radius:6px;border:1px solid rgba(94,200,122,0.25);"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);margin-bottom:3px;">SR Conv%</div><div id="c-sr-req-conv" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#5ec87a;">—</div></div>
+        </div>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <div style="padding:14px 16px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Expected DOs per Role</div>
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);padding-bottom:4px;border-bottom:1px solid var(--border);"><div></div><div style="text-align:center;">MIN</div><div style="text-align:center;">AVG</div><div style="text-align:center;">MAX</div></div>
-          <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:6px;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><div style="font-size:10px;color:var(--muted);">JR <span id="r-jr-count" style="color:var(--accent);">(×5)</span></div><div style="text-align:center;"><span id="r-jr-min" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--text);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div><div style="text-align:center;"><span id="r-jr-avg" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div><div style="text-align:center;"><span id="r-jr-max" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent2);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div></div>
-          <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:6px;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><div style="font-size:10px;color:var(--muted);">Chaser <span id="r-ch-count" style="color:var(--accent);">(×7)</span></div><div style="text-align:center;"><span id="r-ch-min" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--text);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div><div style="text-align:center;"><span id="r-ch-avg" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div><div style="text-align:center;"><span id="r-ch-max" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent2);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div></div>
-          <div style="display:grid;grid-template-columns:80px 1fr 1fr 1fr;gap:6px;align-items:center;padding:5px 0;"><div style="font-size:10px;color:var(--muted);">SR <span id="r-sr-count" style="color:var(--accent);">(×3)</span></div><div style="text-align:center;"><span id="r-sr-min" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--text);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div><div style="text-align:center;"><span id="r-sr-avg" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div><div style="text-align:center;"><span id="r-sr-max" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent2);">—</span><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">DOs</div></div></div>
+    <div style="display:flex;flex-direction:column;gap:9px;">
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;">Expected DOs per Role</div>
+          <div style="display:flex;gap:4px;">
+            <button onclick="setCalcMode('min')" id="mode-min" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s;">MIN</button>
+            <button onclick="setCalcMode('avg')" id="mode-avg" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);cursor:pointer;transition:all 0.2s;">AVG</button>
+            <button onclick="setCalcMode('max')" id="mode-max" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s;">MAX</button>
+          </div>
         </div>
+        <!-- S11 tier tables — same engine as S5 but read-only display -->
+        <div id="s11-results" style="display:flex;flex-direction:column;gap:5px;"></div>
       </div>
-      <div style="padding:14px 16px;border-radius:12px;background:var(--surface);border:1px solid var(--border);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Team Totals</div>
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:9px;">Team Totals</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-          <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);"><div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:4px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">TOTAL LEADS</div><span class="calc-tip" data-tip="Total leads needed = (JR + Chaser + SR) × leads per agent." style="width:12px;height:12px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;">?</span></div><div id="r-total-leads" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--text);">—</div></div>
-          <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);"><div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:4px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">TEAM AVG DOs</div><span class="calc-tip" data-tip="Team total DOs at average conversion: JR at 12 DOs avg, Chaser at 20 DOs avg, SR at 30 DOs avg." style="width:12px;height:12px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;">?</span></div><div id="r-total-avg" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--accent);">—</div></div>
-          <div id="feasibility-box" style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);"><div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:4px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);">TARGET GAP</div><span class="calc-tip" data-tip="Difference between your DO target and the team average. Positive = surplus. Negative = shortfall." style="width:12px;height:12px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;">?</span></div><div id="r-gap" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;">—</div><div id="r-gap-label" style="font-family:'IBM Plex Mono',monospace;font-size:8px;margin-top:2px;"></div></div>
+          <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);margin-bottom:4px;">TOTAL LEADS</div>
+            <div id="r-total-leads" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--text);">—</div>
+          </div>
+          <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
+            <div id="r-total-avg-label" style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);margin-bottom:4px;">TEAM DOs (AVG)</div>
+            <div id="r-total-avg" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--accent);">—</div>
+          </div>
+          <div id="feasibility-box" style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);margin-bottom:4px;">TARGET GAP</div>
+            <div id="r-gap" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;">—</div>
+            <div id="r-gap-label" style="font-family:'IBM Plex Mono',monospace;font-size:8px;margin-top:2px;"></div>
+          </div>
         </div>
       </div>
-      <div id="calc-tooltip" style="padding:10px 14px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);font-size:11px;color:var(--muted);line-height:1.6;min-height:44px;display:flex;align-items:center;"><span style="color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:9px;">Hover the ? icons to see how each number is calculated.</span></div>
+      <!-- Recovery targets -->
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Recovery Plan — Overall Conv% Targets</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+          <div style="padding:8px;background:var(--surface);border-radius:8px;border:1px solid rgba(224,96,128,0.2);text-align:center;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">MONTH 1</div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#e06080;">25%</div><div style="font-size:9px;color:var(--muted);">Recovery floor</div></div>
+          <div style="padding:8px;background:var(--surface);border-radius:8px;border:1px solid rgba(251,146,60,0.3);text-align:center;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">MONTH 2</div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#fb923c;">30%</div><div style="font-size:9px;color:var(--muted);">Trend confirm</div></div>
+          <div style="padding:8px;background:var(--surface);border-radius:8px;border:1px solid rgba(94,200,122,0.3);text-align:center;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">MONTH 3</div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#5ec87a;">35%+</div><div style="font-size:9px;color:var(--muted);">Stretch goal</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══ SLIDE 12 — WEEKLY ESCALATION PLAN ══ -->
+<!-- ══ SLIDE 12 — WEEKLY ESCALATION PLAN (DYNAMIC) ══ -->
 <div class="slide" data-theme="blue">
   <div class="fu slide-label">Weekly Escalation Plan</div>
   <div class="fu headline">Missing the Minimum?<br/><span class="hl">Here's What Happens</span></div>
-  <div class="fu subhead">The plan runs inside one month. Missing a weekly checkpoint triggers an automatic response — no exceptions, no delays.</div>
-  <div class="fu" style="width:100%;max-width:960px;margin-top:10px;">
-    <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;">
-      <div style="padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);"></div>
-      <div style="padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);border-right:1px solid var(--border);"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(200,176,128,0.9);font-weight:700;">JR Chaser</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:2px;">Monthly min: 8 DOs (Mo.1) / 10 DOs (Mo.2) / 16 DOs (Mo.3) &middot; Conv min: 10% / 13% / 20%</div></div>
-      <div style="padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);border-right:1px solid var(--border);"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(90,144,232,0.9);font-weight:700;">Chaser</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:2px;">Monthly minimum: 16 DOs &middot; Conv minimum: 20%</div></div>
-      <div style="padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border);"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(94,200,122,0.9);font-weight:700;">SR Chaser</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:2px;">Monthly minimum: 20 DOs &middot; Conv minimum: 25%</div></div>
-      <!-- W1 -->
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-left:3px solid var(--accent);background:var(--surface2);"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);">W1</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:2px;">~25% of min</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);margin-top:1px;font-weight:700;">Alert</div></div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">Mo.1: 2 DOs &middot; ~2.5% conv</strong><br/><strong style="color:var(--text);">Mo.2: 2–3 DOs &middot; ~3% conv</strong><br/><strong style="color:var(--text);">Mo.3: 4 DOs &middot; ~5% conv</strong><br/>If not met &rarr; <strong style="color:var(--accent);">Alert sent.</strong> TL reviews lead quality and activity.</div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">4 DOs cumulative &middot; ~5% conv</strong><br/><br/>If not met &rarr; <strong style="color:var(--accent);">Alert sent.</strong> TL reviews lead quality and activity.</div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">5 DOs cumulative &middot; ~6% conv</strong><br/><br/>If not met &rarr; <strong style="color:var(--accent);">Alert sent.</strong> TL reviews lead quality and activity.</div>
-      <!-- W2 -->
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-left:3px solid #fb923c;background:var(--surface2);"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:#fb923c;">W2</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:2px;">~50% of min</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#fb923c;margin-top:1px;font-weight:700;">Alert + 1-on-1</div></div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">Mo.1: 4 DOs &middot; ~5% conv</strong><br/><strong style="color:var(--text);">Mo.2: 5 DOs &middot; ~6.5% conv</strong><br/><strong style="color:var(--text);">Mo.3: 8 DOs &middot; ~10% conv</strong><br/>If not met &rarr; <strong style="color:#fb923c;">Alert + 1-on-1 meeting.</strong> What's blocking you? What's the plan?</div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">8 DOs cumulative &middot; ~10% conv</strong><br/><br/>If not met &rarr; <strong style="color:#fb923c;">Alert + 1-on-1 meeting.</strong> What's blocking you? What's the plan?</div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">10 DOs cumulative &middot; ~12.5% conv</strong><br/><br/>If not met &rarr; <strong style="color:#fb923c;">Alert + 1-on-1 meeting.</strong> What's blocking you? What's the plan?</div>
-      <!-- W3 -->
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-left:3px solid #e06080;background:var(--surface2);"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:#e06080;">W3</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:2px;">~75% of min</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:#e06080;margin-top:1px;font-weight:700;">Underperformance Plan</div></div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">Mo.1: 6 DOs &middot; ~7.5% conv</strong><br/><strong style="color:var(--text);">Mo.2: 8 DOs &middot; ~10% conv</strong><br/><strong style="color:var(--text);">Mo.3: 12 DOs &middot; ~15% conv</strong><br/>If not met &rarr; <strong style="color:#e06080;">Underperformance Plan initiated.</strong> Mandatory daily coaching, reduced lead load.</div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">12 DOs cumulative &middot; ~15% conv</strong><br/><br/>If not met &rarr; <strong style="color:#e06080;">Underperformance Plan initiated.</strong> Mandatory daily coaching, reduced lead load.</div>
-      <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">15 DOs cumulative &middot; ~19% conv</strong><br/><br/>If not met &rarr; <strong style="color:#e06080;">Underperformance Plan initiated.</strong> Mandatory daily coaching, reduced lead load.</div>
-      <!-- W4 -->
-      <div style="padding:10px 12px;border-left:3px solid var(--accent);background:var(--surface2);"><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--accent);">W4</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);margin-top:2px;">Month end</div><div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);margin-top:1px;font-weight:700;">Action Plan</div></div>
-      <div style="padding:10px 12px;border-right:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">Mo.1: 8 DOs &middot; 10% conv</strong><br/><strong style="color:var(--text);">Mo.2: 10 DOs &middot; 13% conv</strong><br/><strong style="color:var(--text);">Mo.3: 16 DOs &middot; 20% conv</strong><br/>Below minimum &rarr; <strong style="color:#e06080;">Action Plan initiated.</strong> Misses 2nd month &rarr; Final Action Plan. Misses 3rd &rarr; Termination review.</div>
-      <div style="padding:10px 12px;border-right:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">16 DOs &middot; 20% conv</strong><br/><br/>Below minimum &rarr; <strong style="color:#e06080;">Action Plan initiated.</strong> Misses 2nd month &rarr; Final Action Plan. Misses 3rd &rarr; Termination review.</div>
-      <div style="padding:10px 12px;font-size:10.5px;color:var(--muted);line-height:1.55;"><strong style="color:var(--text);">20 DOs &middot; 25% conv</strong><br/><br/>Below minimum &rarr; <strong style="color:#e06080;">Action Plan initiated.</strong> Misses 2nd month &rarr; Final Action Plan. Misses 3rd &rarr; Termination review.</div>
+  <div class="fu subhead">Set each agent's monthly DO target below — the plan calculates exact weekly checkpoints and escalation actions automatically.</div>
+
+  <!-- Target inputs per role -->
+  <div class="fu" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;width:100%;max-width:960px;">
+    <div style="padding:10px 14px;border-radius:10px;background:var(--surface2);border:1px solid rgba(200,176,128,0.3);">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(200,176,128,0.8);text-transform:uppercase;margin-bottom:6px;">JR Monthly DO Target</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <div style="flex:1;"><input type="number" id="s12-jr-m1" value="8" min="1" oninput="calcS12()" placeholder="Mo.1" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Playfair Display',serif;font-size:14px;font-weight:800;color:rgba(200,176,128,0.9);outline:none;text-align:center;"/><div style="font-size:7.5px;color:var(--faint);text-align:center;margin-top:2px;font-family:'IBM Plex Mono',monospace;">Month 1</div></div>
+        <div style="flex:1;"><input type="number" id="s12-jr-m2" value="12" min="1" oninput="calcS12()" placeholder="Mo.2" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Playfair Display',serif;font-size:14px;font-weight:800;color:rgba(200,176,128,0.9);outline:none;text-align:center;"/><div style="font-size:7.5px;color:var(--faint);text-align:center;margin-top:2px;font-family:'IBM Plex Mono',monospace;">Month 2</div></div>
+        <div style="flex:1;"><input type="number" id="s12-jr-m3" value="16" min="1" oninput="calcS12()" placeholder="Mo.3" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Playfair Display',serif;font-size:14px;font-weight:800;color:rgba(200,176,128,0.9);outline:none;text-align:center;"/><div style="font-size:7.5px;color:var(--faint);text-align:center;margin-top:2px;font-family:'IBM Plex Mono',monospace;">Month 3</div></div>
+      </div>
     </div>
+    <div style="padding:10px 14px;border-radius:10px;background:var(--surface2);border:1px solid rgba(90,144,232,0.35);">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(90,144,232,0.9);text-transform:uppercase;margin-bottom:6px;">Chaser Monthly DO Target</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="number" id="s12-ch" value="19" min="1" oninput="calcS12()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#5a90e8;outline:none;text-align:center;"/>
+      </div>
+      <div style="font-size:8.5px;color:var(--muted);margin-top:4px;">Set exact DOs required — plan updates automatically.</div>
+    </div>
+    <div style="padding:10px 14px;border-radius:10px;background:rgba(94,200,122,0.03);border:1px solid rgba(94,200,122,0.4);">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:rgba(94,200,122,0.9);text-transform:uppercase;margin-bottom:6px;">SR Monthly DO Target</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="number" id="s12-sr" value="26" min="1" oninput="calcS12()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#5ec87a;outline:none;text-align:center;"/>
+      </div>
+      <div style="font-size:8.5px;color:var(--muted);margin-top:4px;">Set exact DOs required — plan updates automatically.</div>
+    </div>
+  </div>
+
+  <!-- Dynamic escalation table -->
+  <div class="fu" style="width:100%;max-width:960px;margin-top:8px;">
+    <div id="s12-table" style="border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:10px;"></div>
+  </div>
+  <div class="fu" style="margin-top:7px;font-size:10px;color:var(--muted);text-align:center;max-width:780px;line-height:1.6;">
+    W1 = Alert · W2 = Alert + 1-on-1 · W3 = Underperformance Plan + daily coaching · W4 = Action Plan / PIP · 2nd miss = Final Action Plan · 3rd miss = Termination Review
   </div>
 </div>
 
@@ -527,6 +593,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
         <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);margin-bottom:8px;">DOs &divide; Total Actions &times; 100</div>
         <div style="font-size:11.5px;color:var(--muted);line-height:1.65;">Measures how many actions it took to produce each DO. This is the <strong style="color:var(--text);">efficiency metric</strong> — it tells you the quality of their work, not just the quantity.</div>
       </div>
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Supporting Execution KPIs</div>
+        <div style="display:flex;flex-direction:column;gap:4px;font-size:10.5px;color:var(--muted);line-height:1.6;">
+          <div>· <strong style="color:var(--text);">First Touch Compliance %</strong> — touched within 24h</div>
+          <div>· <strong style="color:var(--text);">Same-Day Fax Compliance %</strong></div>
+          <div>· <strong style="color:var(--text);">No-Movement Leads</strong> — 3+ days no update</div>
+          <div>· <strong style="color:var(--text);">Overdue Follow-Ups</strong></div>
+          <div>· <strong style="color:var(--text);">Office Reach Rate</strong></div>
+          <div>· <strong style="color:var(--text);">Fax Sent Rate</strong></div>
+        </div>
+      </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);text-transform:uppercase;letter-spacing:0.1em;padding-bottom:6px;border-bottom:1px solid var(--border);">How to Read the Combination</div>
@@ -538,19 +615,116 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
   </div>
 </div>
 
-<!-- ══ SLIDE 14 — SUMMARY ══ -->
+<!-- ══ SLIDE 14 — CHASING RECOVERY PLAN ══ -->
+<div class="slide" data-theme="rose">
+  <div class="fu slide-label">Chasing Recovery Plan</div>
+  <div class="fu headline">Restore Control<br/><span class="hl">Build a 35%+ System</span></div>
+  <div class="fu" style="width:100%;max-width:960px;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow-y:auto;max-height:calc(100vh - 250px);">
+    <!-- Left: Mission + Tiered Targets -->
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Mission Statement</div>
+        <div style="font-size:11px;color:var(--text);font-weight:600;line-height:1.6;margin-bottom:6px;">The chaser's primary responsibility is to return signed RXs through disciplined and consistent follow-up execution.</div>
+        <div style="font-size:10.5px;color:var(--muted);line-height:1.65;">Source analysis is management's job. Lead quality analysis is done in management review. The chaser works one queue — management analyzes it in the background by source.</div>
+      </div>
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Tiered Targets by Seniority</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="padding:8px 10px;border-radius:8px;background:rgba(94,200,122,0.07);border:1px solid rgba(94,200,122,0.3);">
+            <div style="font-size:10px;font-weight:700;color:#5ec87a;margin-bottom:4px;">Tier 1 — SR / Top Chasers</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:10px;color:var(--muted);">
+              <div>Mo.1: <strong style="color:var(--text);">28%</strong></div>
+              <div>Mo.2: <strong style="color:var(--text);">32%</strong></div>
+              <div>Mo.3: <strong style="color:var(--text);">35%</strong></div>
+            </div>
+          </div>
+          <div style="padding:8px 10px;border-radius:8px;background:rgba(90,144,232,0.07);border:1px solid rgba(90,144,232,0.3);">
+            <div style="font-size:10px;font-weight:700;color:#5a90e8;margin-bottom:4px;">Tier 2 — Core Chasers</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:10px;color:var(--muted);">
+              <div>Mo.1: <strong style="color:var(--text);">22–24%</strong></div>
+              <div>Mo.2: <strong style="color:var(--text);">27–30%</strong></div>
+              <div>Mo.3: <strong style="color:var(--text);">30–32%</strong></div>
+            </div>
+          </div>
+          <div style="padding:8px 10px;border-radius:8px;background:rgba(200,160,48,0.07);border:1px solid rgba(200,160,48,0.3);">
+            <div style="font-size:10px;font-weight:700;color:#c8a030;margin-bottom:4px;">Tier 3 — Weak / Recovery / New</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:10px;color:var(--muted);">
+              <div>Mo.1: <strong style="color:var(--text);">15–18%</strong></div>
+              <div>Mo.2: <strong style="color:var(--text);">20–22%</strong></div>
+              <div>Mo.3: <strong style="color:var(--text);">25%+</strong></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:7px;font-size:9px;color:var(--faint);font-family:'IBM Plex Mono',monospace;">35% stretch is maintained only for SR Tier 1. Core Chasers max at 32% Month 3.</div>
+      </div>
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Consequences System</div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:6px;font-size:10.5px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#5a90e8;font-weight:700;">Level 1</span><span style="color:var(--muted);">Verbal Warning — missed first-touch, repeated late follow-up, weak daily execution.</span></div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:6px;font-size:10.5px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#fb923c;font-weight:700;">Level 2</span><span style="color:var(--muted);">Written Warning — same issue repeated in same week, no-movement from negligence.</span></div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:6px;font-size:10.5px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.05);"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#e06080;font-weight:700;">Level 3</span><span style="color:var(--muted);">14-Day PIP — low performance vs minimum, no improvement after coaching.</span></div>
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:6px;font-size:10.5px;padding:5px 0;"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#e06080;font-weight:700;">Level 4</span><span style="color:var(--muted);">Final Review / Exit — no improvement after PIP, repeated lead waste, clear mismatch.</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Right: Operating Rules + Reviews -->
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">Fixed Operating Rules</div>
+        <div style="display:flex;flex-direction:column;gap:4px;font-size:10.5px;color:var(--muted);line-height:1.6;">
+          <div><strong style="color:var(--text);">Cycle:</strong> Day 1–45 official. Day 14 = Early Signal · Day 30 = Corrective · Day 45 = Final</div>
+          <div><strong style="color:var(--text);">Lead Load:</strong> 75 new leads per chaser per 30-day window</div>
+          <div><strong style="color:var(--text);">First Touch:</strong> Required within 24h · Max 48h (overload exception) · After 48h = red flag</div>
+          <div><strong style="color:var(--text);">Source Visibility:</strong> Chaser does NOT see source. Management tracks internally. Source decisions every 45 days.</div>
+          <div><strong style="color:var(--text);">Outsourced Leads:</strong> Internal quality gate required before entering chasing queue.</div>
+        </div>
+      </div>
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">3 Review Gates</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="padding:8px 10px;border-radius:8px;background:rgba(251,146,60,0.07);border:1px solid rgba(251,146,60,0.3);">
+            <div style="font-size:10px;font-weight:700;color:#fb923c;margin-bottom:3px;">Day 14 — Early Signal Review</div>
+            <div style="font-size:10px;color:var(--muted);line-height:1.5;">First-touch compliance · No-movement cases · Fax speed · Early team movement · TL control quality. Not final judgment — detect early warning signs only.</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:8px;background:rgba(90,144,232,0.07);border:1px solid rgba(90,144,232,0.3);">
+            <div style="font-size:10px;font-weight:700;color:#5a90e8;margin-bottom:3px;">Day 30 — Corrective Review</div>
+            <div style="font-size:10px;color:var(--muted);line-height:1.5;">Trend improvement · Progress toward RX% · Weak performer movement · TL coaching impact. Dashboard review: what's moved, what hasn't, what insights emerged.</div>
+          </div>
+          <div style="padding:8px 10px;border-radius:8px;background:rgba(94,200,122,0.07);border:1px solid rgba(94,200,122,0.3);">
+            <div style="font-size:10px;font-weight:700;color:#5ec87a;margin-bottom:3px;">Day 45 — Final Review</div>
+            <div style="font-size:10px;color:var(--muted);line-height:1.5;">Final conversion by chaser + TL · Source performance · Reward decisions · PIP decisions · Exit decisions · Source scale/reduce decisions.</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">7-Day Launch Plan</div>
+        <div style="display:flex;flex-direction:column;gap:3px;font-size:10px;color:var(--muted);line-height:1.6;">
+          <div><strong style="color:var(--text);">Day 0:</strong> Launch meeting — explain system, targets, consequences, dashboard, new KPI</div>
+          <div><strong style="color:var(--text);">Day 1:</strong> Activate dashboard · assign chasers under TLs · define tiers · publish targets</div>
+          <div><strong style="color:var(--text);">Day 2:</strong> Untouched-lead audit · no-movement audit · review old weak cases</div>
+          <div><strong style="color:var(--text);">Day 3:</strong> Review calls · review fax timing · identify first weak links</div>
+          <div><strong style="color:var(--text);">Day 4:</strong> Issue first verbal warnings where needed</div>
+          <div><strong style="color:var(--text);">Day 5:</strong> Top 5 / Bottom 5 identified · TL coaching notes completed</div>
+          <div><strong style="color:var(--text);">Day 7:</strong> First weekly review · what moved · what stayed weak · first bottlenecks identified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 15 — SUMMARY ══ -->
 <div class="slide" data-theme="stone">
   <div class="fu slide-label">Summary</div>
   <div class="fu headline">The System in<br/><span class="hl">Five Lines</span></div>
   <div class="fu stack" style="width:100%;max-width:700px;margin-top:16px;gap:9px;">
-    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">1</span><span class="rule-text" style="font-size:12.5px;"><strong>3 roles — 3 expectations.</strong> JR: 8-16 DOs (months 1-3) · Chaser: 20 DOs · SR Chaser: 30 DOs. Each role has its own standards.</span></div>
-    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">2</span><span class="rule-text" style="font-size:12.5px;"><strong>Leads in &rarr; DOs out.</strong> Lead count is fixed for everyone (70-80). The difference is conv%. SR can reach 50% max.</span></div>
-    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">3</span><span class="rule-text" style="font-size:12.5px;"><strong>Time is pre-structured.</strong> You don't come in and improvise — the daily plan exists. Follow it and you'll hit the number.</span></div>
-    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">4</span><span class="rule-text" style="font-size:12.5px;"><strong>Leads don't wait.</strong> 30 days max per lead. Day 14 idle = auto re-assign to SR. Neglect costs you a deduction and your conversion rate.</span></div>
-    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">5</span><span class="rule-text" style="font-size:12.5px;"><strong>Performance is visible to everyone.</strong> Weekly leaderboard · monthly tiers · automatic promotion when earned. Good work gets rewarded.</span></div>
+    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">1</span><span class="rule-text" style="font-size:12.5px;"><strong>3 roles — 3 expectations.</strong> JR: 8-16 DOs (months 1-3) · Chaser: ~19 DOs · SR Chaser: 26-30 DOs. Each role has its own standards — tiers are fully adjustable.</span></div>
+    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">2</span><span class="rule-text" style="font-size:12.5px;"><strong>Leads in &rarr; DOs out.</strong> 75 leads per agent per 30-day window. The difference is conv%. Recovery target: 25% → 30% → 35%+ over 3 months.</span></div>
+    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">3</span><span class="rule-text" style="font-size:12.5px;"><strong>45-day cycle. 3 review gates.</strong> Day 14 = early signal · Day 30 = corrective review · Day 45 = final decision. No lead dies at Day 30. First touch within 24h is mandatory.</span></div>
+    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">4</span><span class="rule-text" style="font-size:12.5px;"><strong>4 consequence levels — no exceptions.</strong> Verbal warning → Written warning → 14-day PIP → Final Review/Exit. Weekly escalation plan fires automatically when checkpoints are missed.</span></div>
+    <div class="rule-item" style="padding:14px 18px;border-color:var(--accent);background:var(--surface);"><span class="rule-num" style="font-size:15px;padding:4px 11px;font-family:'Playfair Display',serif;font-weight:900;">5</span><span class="rule-text" style="font-size:12.5px;"><strong>Performance is visible to everyone.</strong> Weekly leaderboard · discipline scores · source decisions every 45 days · rewards tied to behavior that creates sustainable RX volume — not just volume alone.</span></div>
   </div>
   <div class="fu" style="margin-top:14px;text-align:center;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);">JR: 8-16 DOs · Chaser: 20 DOs · SR Chaser: 30 DOs · 70-80 leads/agent · 15-20 agents</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);">JR: 8-16 DOs · Chaser: ~19 DOs · SR Chaser: 26-30 DOs · 75 leads/agent · 45-day cycle · 3 review gates</div>
   </div>
 </div>
 
@@ -561,7 +735,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
   <div class="nav-dots" id="navDots"></div>
   <div class="nav-arrows">
     <button class="nav-btn" id="prevBtn">←</button>
-    <span class="nav-counter" id="counter">1 / 14</span>
+    <span class="nav-counter" id="counter">1 / 15</span>
     <button class="nav-btn" id="nextBtn">→</button>
   </div>
 </div>
@@ -589,35 +763,251 @@ let tx=null;
 document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
 document.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>48)goTo(dx<0?cur+1:cur-1);tx=null;},{passive:true});
 
+// ═══════════════════════════════════════════════
+// SLIDE 5 — FLEXIBLE TIER SYSTEM
+// ═══════════════════════════════════════════════
+const S5_DEFAULTS = {
+  jr: [
+    {label:'Month 1 — Start', conv:10},
+    {label:'Month 2 — Improving', conv:15},
+    {label:'Month 3 — Max', conv:20},
+  ],
+  ch: [
+    {label:'Minimum', conv:20},
+    {label:'Target', conv:25},
+    {label:'Good', conv:30},
+    {label:'Elite Max', conv:40},
+  ],
+  sr: [
+    {label:'Minimum', conv:25},
+    {label:'Target', conv:30},
+    {label:'SR Tier 1', conv:35},
+    {label:'40 DOs', conv:40},
+    {label:'Elite+', conv:45},
+    {label:'SR Max', conv:50},
+  ]
+};
+
+const s5Tiers = {jr:[...S5_DEFAULTS.jr.map(t=>({...t}))], ch:[...S5_DEFAULTS.ch.map(t=>({...t}))], sr:[...S5_DEFAULTS.sr.map(t=>({...t}))]};
+
+function getS5Leads(){return parseInt(document.getElementById('s5-leads').value)||75;}
+
+function renderS5Tiers(role){
+  const container=document.getElementById('s5-'+role+'-tiers');
+  if(!container)return;
+  const L=getS5Leads();
+  container.innerHTML='';
+  s5Tiers[role].forEach((tier,i)=>{
+    const dos=Math.round(L*tier.conv/100);
+    const row=document.createElement('div');
+    row.style.cssText='display:grid;grid-template-columns:1fr 58px 38px 22px;gap:3px 4px;align-items:center;padding:4px 7px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);';
+    row.innerHTML=`
+      <input value="${tier.label}" onchange="s5Tiers['${role}'][${i}].label=this.value" style="background:transparent;border:none;color:var(--text);font-size:10px;font-family:'DM Sans',sans-serif;outline:none;width:100%;padding:1px 2px;"/>
+      <input type="number" value="${tier.conv}" min="1" max="100" onchange="s5Tiers['${role}'][${i}].conv=parseFloat(this.value)||0;calcS5()" style="background:transparent;border:none;color:var(--accent);font-size:10px;font-family:'IBM Plex Mono',monospace;outline:none;width:100%;text-align:center;padding:1px 2px;"/>
+      <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:var(--accent2);text-align:center;">${dos}</div>
+      <button onclick="removeTierRow('${role}',${i})" style="width:20px;height:20px;border-radius:4px;border:none;background:rgba(224,96,128,0.15);color:#e06080;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(224,96,128,0.35)'" onmouseout="this.style.background='rgba(224,96,128,0.15)'">×</button>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function calcS5(){
+  ['jr','ch','sr'].forEach(role=>renderS5Tiers(role));
+}
+
+window.addTierRow=function(role){
+  s5Tiers[role].push({label:'New Tier', conv:0});
+  renderS5Tiers(role);
+};
+
+window.removeTierRow=function(role,idx){
+  if(s5Tiers[role].length<=1)return;
+  s5Tiers[role].splice(idx,1);
+  renderS5Tiers(role);
+};
+
+// ═══════════════════════════════════════════════
+// SLIDE 11 — TEAM CALCULATOR
+// ═══════════════════════════════════════════════
+let calcMode='avg';
+function setCalcMode(mode){
+  calcMode=mode;
+  ['min','avg','max'].forEach(m=>{
+    const btn=document.getElementById('mode-'+m);
+    if(!btn)return;
+    if(m===mode){btn.style.borderColor='var(--accent)';btn.style.color='var(--accent)';}
+    else{btn.style.borderColor='var(--border)';btn.style.color='var(--muted)';}
+  });
+  calcTeam();
+}
+
 function calcTeam(){
   const doTarget=parseInt(document.getElementById('c-do-target').value)||0;
   const jr=parseInt(document.getElementById('c-jr').value)||0;
   const ch=parseInt(document.getElementById('c-ch').value)||0;
   const sr=parseInt(document.getElementById('c-sr').value)||0;
-  const leads=parseInt(document.getElementById('c-leads').value)||80;
-  const JR={min:8,avg:12,max:16},CH={min:16,avg:20,max:32},SR={min:20,avg:30,max:40};
-  const jrMin=jr*JR.min,jrAvg=jr*JR.avg,jrMax=jr*JR.max;
-  const chMin=ch*CH.min,chAvg=ch*CH.avg,chMax=ch*CH.max;
-  const srMin=sr*SR.min,srAvg=sr*SR.avg,srMax=sr*SR.max;
-  const totalAgents=jr+ch+sr,totalLeads=totalAgents*leads,totalAvg=jrAvg+chAvg+srAvg,gap=totalAvg-doTarget;
+  const leads=parseInt(document.getElementById('c-leads').value)||75;
+  const doAgent=parseInt(document.getElementById('c-do-agent').value)||0;
+
+  // Use current S5 tiers to compute min/avg/max per role
+  const getStats=(role)=>{
+    const trs=s5Tiers[role];
+    if(!trs||trs.length===0)return{min:0,avg:0,max:0};
+    const convs=trs.map(t=>t.conv).filter(c=>c>0);
+    if(convs.length===0)return{min:0,avg:0,max:0};
+    const minC=Math.min(...convs);
+    const maxC=Math.max(...convs);
+    const avgC=convs.reduce((a,b)=>a+b,0)/convs.length;
+    return{
+      min:Math.round(leads*minC/100),
+      avg:Math.round(leads*avgC/100),
+      max:Math.round(leads*maxC/100),
+      minC,avgC,maxC
+    };
+  };
+
+  const jrS=getStats('jr');
+  const chS=getStats('ch');
+  const srS=getStats('sr');
+
+  const mode=calcMode||'avg';
+  const totalMode=(jr*jrS[mode])+(ch*chS[mode])+(sr*srS[mode]);
+  const totalAgents=jr+ch+sr;
+  const totalLeads=totalAgents*leads;
+  const gap=totalMode-doTarget;
+
+  // Build results display
+  const resultsEl=document.getElementById('s11-results');
+  if(resultsEl){
+    resultsEl.innerHTML=`
+      <div style="display:grid;grid-template-columns:90px 1fr 1fr 1fr 1fr;gap:4px 6px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);padding-bottom:5px;border-bottom:1px solid var(--border);">
+        <div></div><div style="text-align:center;">MIN</div><div style="text-align:center;">AVG</div><div style="text-align:center;">MAX</div><div style="text-align:center;color:var(--accent);">MODE(${mode.toUpperCase()})</div>
+      </div>
+      ${buildResultRow('JR','rgba(200,176,128,0.8)',jr,jrS,mode)}
+      ${buildResultRow('Chaser','rgba(90,144,232,0.9)',ch,chS,mode)}
+      ${buildResultRow('SR','rgba(94,200,122,0.9)',sr,srS,mode)}
+    `;
+  }
+
   const setEl=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-  setEl('r-jr-count',`(×${jr})`);setEl('r-ch-count',`(×${ch})`);setEl('r-sr-count',`(×${sr})`);
-  const animNum=(id,val)=>{const el=document.getElementById(id);if(!el)return;const from=parseInt(el.textContent)||0;const start=performance.now();const tick=now=>{const p=Math.min((now-start)/700,1);const ease=1-Math.pow(1-p,3);el.textContent=Math.round(from+(val-from)*ease);if(p<1)requestAnimationFrame(tick);};requestAnimationFrame(tick);};
-  animNum('r-jr-min',jrMin);animNum('r-jr-avg',jrAvg);animNum('r-jr-max',jrMax);
-  animNum('r-ch-min',chMin);animNum('r-ch-avg',chAvg);animNum('r-ch-max',chMax);
-  animNum('r-sr-min',srMin);animNum('r-sr-avg',srAvg);animNum('r-sr-max',srMax);
-  animNum('r-total-leads',totalLeads);animNum('r-total-avg',totalAvg);animNum('r-gap',Math.abs(gap));
-  const gapEl=document.getElementById('r-gap');const gapLbl=document.getElementById('r-gap-label');const fbox=document.getElementById('feasibility-box');
-  if(gap>=0){gapEl.style.color='#5ec87a';gapLbl.textContent='surplus';gapLbl.style.color='#5ec87a';fbox.style.borderColor='rgba(94,200,122,0.3)';}
-  else{gapEl.style.color='#e06080';gapLbl.textContent='shortfall';gapLbl.style.color='#e06080';fbox.style.borderColor='rgba(224,96,128,0.3)';}
+  setEl('r-total-leads',totalLeads);
+  setEl('r-total-avg',totalMode);
+  const avgLbl=document.getElementById('r-total-avg-label');
+  if(avgLbl)avgLbl.textContent='TEAM DOs ('+mode.toUpperCase()+')';
+
+  const gapEl=document.getElementById('r-gap');
+  const gapLbl=document.getElementById('r-gap-label');
+  const fbox=document.getElementById('feasibility-box');
+  if(gapEl)gapEl.textContent=Math.abs(gap);
+  if(gap>=0){
+    if(gapEl)gapEl.style.color='#5ec87a';
+    if(gapLbl){gapLbl.textContent='surplus';gapLbl.style.color='#5ec87a';}
+    if(fbox)fbox.style.borderColor='rgba(94,200,122,0.3)';
+  }else{
+    if(gapEl)gapEl.style.color='#e06080';
+    if(gapLbl){gapLbl.textContent='shortfall';gapLbl.style.color='#e06080';}
+    if(fbox)fbox.style.borderColor='rgba(224,96,128,0.3)';
+  }
+
+  const reqConv=(dos)=>leads>0?(dos/leads*100).toFixed(1)+'%':'—';
+  setEl('c-jr-req-conv',doAgent>0?reqConv(doAgent):'—');
+  setEl('c-ch-req-conv',doAgent>0?reqConv(doAgent):'—');
+  setEl('c-sr-req-conv',doAgent>0?reqConv(doAgent):'—');
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  document.querySelectorAll('.calc-tip').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{const t=document.getElementById('calc-tooltip');if(t)t.innerHTML=`<span style="color:var(--text)">${el.dataset.tip}</span>`;});
-    el.addEventListener('mouseleave',()=>{const t=document.getElementById('calc-tooltip');if(t)t.innerHTML=`<span style="color:var(--faint);font-family:'IBM Plex Mono',monospace;font-size:9px;">Hover the ? icons to see how each number is calculated.</span>`;});
+function buildResultRow(label,color,count,stats,mode){
+  const highlight=(v)=>`<span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent);">${v}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div>`;
+  const modeVal=stats[mode]||0;
+  return `<div style="display:grid;grid-template-columns:90px 1fr 1fr 1fr 1fr;gap:4px 6px;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+    <div style="font-size:10px;color:var(--muted);">${label} <span style="color:${color};">(×${count})</span></div>
+    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--muted);">${count*stats.min}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div></div>
+    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--accent);">${count*Math.round(stats.avg)}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div></div>
+    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--accent2);">${count*stats.max}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div></div>
+    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:var(--accent);">${count*modeVal}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div></div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// SLIDE 12 — DYNAMIC ESCALATION PLAN
+// ═══════════════════════════════════════════════
+function calcS12(){
+  const jrM1=parseInt(document.getElementById('s12-jr-m1').value)||8;
+  const jrM2=parseInt(document.getElementById('s12-jr-m2').value)||12;
+  const jrM3=parseInt(document.getElementById('s12-jr-m3').value)||16;
+  const ch=parseInt(document.getElementById('s12-ch').value)||19;
+  const sr=parseInt(document.getElementById('s12-sr').value)||26;
+
+  const WEEKS=[
+    {key:'W1',pct:0.25,color:'var(--accent)',action:'Alert → TL reviews lead quality and activity'},
+    {key:'W2',pct:0.50,color:'#fb923c',action:'Alert + 1-on-1 meeting → What\'s blocking you? What\'s the plan?'},
+    {key:'W3',pct:0.75,color:'#e06080',action:'Underperformance Plan → Mandatory daily coaching, reduced lead load'},
+    {key:'W4',pct:1.00,color:'#e06080',action:'Action Plan → Miss 2nd month = Final Action Plan · Miss 3rd = Termination Review'},
+  ];
+
+  const fmt=(n)=>Math.round(n);
+  const leads=parseInt(document.getElementById('c-leads').value)||75;
+  const convFmt=(dos)=>leads>0?((dos/leads)*100).toFixed(1)+'%':'—';
+
+  let html=`<div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:9.5px;">`;
+
+  // Header
+  html+=`
+    <div style="padding:7px 10px;background:var(--surface);border-bottom:1px solid var(--border);"></div>
+    <div style="padding:7px 10px;background:var(--surface);border-bottom:1px solid var(--border);border-right:1px solid var(--border);"><span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:rgba(200,176,128,0.9);font-weight:700;">JR Chaser</span><br/><span style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">Mo.1: ${jrM1} DOs · Mo.2: ${jrM2} DOs · Mo.3: ${jrM3} DOs</span></div>
+    <div style="padding:7px 10px;background:var(--surface);border-bottom:1px solid var(--border);border-right:1px solid var(--border);"><span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:rgba(90,144,232,0.9);font-weight:700;">Chaser</span><br/><span style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">Monthly min: ${ch} DOs · Conv min: ${convFmt(ch)}</span></div>
+    <div style="padding:7px 10px;background:var(--surface);border-bottom:1px solid var(--border);"><span style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:rgba(94,200,122,0.9);font-weight:700;">SR Chaser</span><br/><span style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">Monthly min: ${sr} DOs · Conv min: ${convFmt(sr)}</span></div>
+  `;
+
+  WEEKS.forEach((w,wi)=>{
+    const isLast=wi===WEEKS.length-1;
+    const border=isLast?'':'border-bottom:1px solid rgba(255,255,255,0.05);';
+
+    const jrTargets=[
+      {m:`Mo.1`,dos:fmt(jrM1*w.pct)},
+      {m:`Mo.2`,dos:fmt(jrM2*w.pct)},
+      {m:`Mo.3`,dos:fmt(jrM3*w.pct)},
+    ];
+    const chTarget=fmt(ch*w.pct);
+    const srTarget=fmt(sr*w.pct);
+
+    html+=`
+      <div style="padding:9px 10px;${border}border-left:3px solid ${w.color};background:var(--surface2);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:${w.color};">${w.key}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);margin-top:1px;">${Math.round(w.pct*100)}% of min</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:${w.color};margin-top:2px;font-weight:700;">${w.key==='W1'?'Alert':w.key==='W2'?'Alert + 1-on-1':w.key==='W3'?'Underperf. Plan':'Action Plan'}</div>
+      </div>
+      <div style="padding:9px 10px;${border}border-right:1px solid rgba(255,255,255,0.05);color:var(--muted);line-height:1.55;">
+        ${jrTargets.map(t=>`<div><strong style="color:var(--text);">${t.m}: ${t.dos} DOs (${convFmt(t.dos)})</strong></div>`).join('')}
+        <div style="margin-top:3px;font-size:9px;">If not met → <strong style="color:${w.color};">${w.key==='W4'?'Action Plan initiated.':w.action.split('→')[0]}</strong></div>
+      </div>
+      <div style="padding:9px 10px;${border}border-right:1px solid rgba(255,255,255,0.05);color:var(--muted);line-height:1.55;">
+        <div><strong style="color:var(--text);">${chTarget} DOs cumulative (${convFmt(chTarget)})</strong></div>
+        <div style="margin-top:3px;font-size:9px;">If not met → <strong style="color:${w.color};">${w.key==='W4'?'Action Plan initiated.':w.action.split('→')[0]}</strong></div>
+      </div>
+      <div style="padding:9px 10px;${border}color:var(--muted);line-height:1.55;">
+        <div><strong style="color:var(--text);">${srTarget} DOs cumulative (${convFmt(srTarget)})</strong></div>
+        <div style="margin-top:3px;font-size:9px;">If not met → <strong style="color:${w.color};">${w.key==='W4'?'Action Plan initiated.':w.action.split('→')[0]}</strong></div>
+      </div>
+    `;
   });
+
+  html+=`</div>`;
+  const t=document.getElementById('s12-table');
+  if(t)t.innerHTML=html;
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+  // Init S5 tiers
+  calcS5();
+
+  // Init S11 calc
   calcTeam();
+
+  // Init S12 escalation
+  calcS12();
 });
 
 document.getElementById('bg').style.background=THEMES['stone'];
