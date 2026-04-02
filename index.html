@@ -218,11 +218,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
   <div class="fu slide-label">Monthly Team Target</div>
   <div class="fu headline">The Numbers<br/><span class="hl">We're Building Toward</span></div>
 
-  <div class="fu" style="display:flex;align-items:center;gap:14px;margin-top:8px;padding:10px 18px;border-radius:10px;background:var(--surface);border:1px solid var(--border);width:100%;max-width:960px;flex-wrap:wrap;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;">Leads / Agent</div>
-    <input type="number" id="s5-leads" value="75" min="1" max="200" oninput="calcS5()" style="width:72px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:5px 10px;font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent);outline:none;text-align:center;"/>
-    <div style="font-size:10px;color:var(--muted);flex:1;">Change leads — all tables update instantly. Add or remove tiers freely per role.</div>
-    <button onclick="printTierSheet()" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.08em;cursor:pointer;white-space:nowrap;transition:all 0.2s;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+  <div class="fu" style="display:flex;align-items:center;gap:10px;margin-top:8px;padding:10px 16px;border-radius:10px;background:var(--surface);border:1px solid var(--border);width:100%;max-width:960px;flex-wrap:wrap;">
+    <!-- Leads FROM → TO -->
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;">Leads / Agent</div>
+      <input type="number" id="s5-leads-from" value="60" min="1" max="200" oninput="calcS5()" style="width:54px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 6px;font-family:'Playfair Display',serif;font-size:14px;font-weight:800;color:var(--accent);outline:none;text-align:center;"/>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);">→</span>
+      <input type="number" id="s5-leads-to" value="80" min="1" max="200" oninput="calcS5()" style="width:54px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 6px;font-family:'Playfair Display',serif;font-size:14px;font-weight:800;color:var(--accent2);outline:none;text-align:center;"/>
+    </div>
+    <div style="width:1px;height:24px;background:var(--border);margin:0 2px;"></div>
+    <!-- Mode toggle -->
+    <div style="display:flex;align-items:center;gap:5px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);text-transform:uppercase;">Show DOs as</div>
+      <button id="s5-mode-conv" onclick="setS5Mode('conv')" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 8px;border-radius:5px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);cursor:pointer;transition:all 0.2s;">Conv% → DOs</button>
+      <button id="s5-mode-dos" onclick="setS5Mode('dos')" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s;">DOs → Conv%</button>
+    </div>
+    <div style="font-size:9px;color:var(--muted);flex:1;">Enter Conv% <em>or</em> DOs per tier — the other value calculates automatically for both leads scenarios.</div>
+    <button onclick="printTierSheet()" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       Print A4 Sheet
     </button>
@@ -233,13 +245,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
     <div style="padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid rgba(200,176,128,0.3);">
       <div style="font-size:9px;font-family:'IBM Plex Mono',monospace;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">JR Chaser</div>
       <div style="font-size:9px;color:var(--muted);margin-bottom:8px;">Progressive · Month 1→3</div>
-      <div style="display:grid;grid-template-columns:1fr 64px 44px 24px;gap:3px 4px;margin-bottom:4px;">
+      <div style="display:grid;grid-template-columns:1fr 52px 52px 52px 52px 24px;gap:3px 3px;margin-bottom:4px;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">Label</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">Conv%</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">DOs</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;" id="s5-jr-h1">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--accent);text-align:center;">DOs<br/><span style="color:var(--faint);">from</span></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;" id="s5-jr-h2">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--accent2);text-align:center;">DOs<br/><span style="color:var(--faint);">to</span></div>
         <div></div>
       </div>
-      <div id="s5-jr-tiers" style="display:flex;flex-direction:column;gap:3px;"></div>
       <button onclick="addTierRow('jr')" style="margin-top:6px;width:100%;padding:4px;border-radius:6px;border:1px dashed rgba(200,176,128,0.35);background:transparent;color:var(--accent);font-size:9px;cursor:pointer;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;transition:background 0.2s;" onmouseover="this.style.background='var(--surface)'" onmouseout="this.style.background='transparent'">+ Add Tier</button>
       <div style="margin-top:5px;font-size:8.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;">Below 8 DOs month 1 = intensive training</div>
     </div>
@@ -247,10 +260,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
     <div style="padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid rgba(90,144,232,0.35);">
       <div style="font-size:9px;font-family:'IBM Plex Mono',monospace;color:#5a90e8;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Chaser</div>
       <div style="font-size:9px;color:var(--muted);margin-bottom:8px;">Month 3+</div>
-      <div style="display:grid;grid-template-columns:1fr 64px 44px 24px;gap:3px 4px;margin-bottom:4px;">
+      <div style="display:grid;grid-template-columns:1fr 52px 52px 52px 52px 24px;gap:3px 3px;margin-bottom:4px;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">Label</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">Conv%</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">DOs</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;" id="s5-ch-h1">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--accent);text-align:center;">DOs<br/><span style="color:var(--faint);">from</span></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;" id="s5-ch-h2">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--accent2);text-align:center;">DOs<br/><span style="color:var(--faint);">to</span></div>
         <div></div>
       </div>
       <div id="s5-ch-tiers" style="display:flex;flex-direction:column;gap:3px;"></div>
@@ -261,10 +276,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
     <div style="padding:12px 14px;border-radius:14px;background:rgba(94,200,122,0.03);border:1px solid rgba(94,200,122,0.4);">
       <div style="font-size:9px;font-family:'IBM Plex Mono',monospace;color:#5ec87a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">SR Chaser</div>
       <div style="font-size:9px;color:var(--muted);margin-bottom:8px;">6 months+</div>
-      <div style="display:grid;grid-template-columns:1fr 64px 44px 24px;gap:3px 4px;margin-bottom:4px;">
+      <div style="display:grid;grid-template-columns:1fr 52px 52px 52px 52px 24px;gap:3px 3px;margin-bottom:4px;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">Label</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">Conv%</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;">DOs</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;" id="s5-sr-h1">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--accent);text-align:center;">DOs<br/><span style="color:var(--faint);">from</span></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);text-align:center;" id="s5-sr-h2">Conv%</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--accent2);text-align:center;">DOs<br/><span style="color:var(--faint);">to</span></div>
         <div></div>
       </div>
       <div id="s5-sr-tiers" style="display:flex;flex-direction:column;gap:3px;"></div>
@@ -435,79 +452,184 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
 <!-- ══ SLIDE 11 — TEAM CALCULATOR (FLEXIBLE) ══ -->
 <div class="slide" data-theme="sand">
   <div class="fu slide-label">Team Calculator</div>
-  <div class="fu headline">Input Your Numbers<br/><span class="hl">Get Instant Targets</span></div>
-  <div class="fu" style="width:100%;max-width:960px;margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-    <div style="display:flex;flex-direction:column;gap:9px;">
-      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;">Monthly DO Target</div></div>
-        <input type="number" id="c-do-target" value="200" min="1" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--accent);outline:none;"/>
-      </div>
-      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Agents per Role</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-          <div><div style="font-size:9px;color:var(--muted);margin-bottom:4px;">JR Chasers</div><input type="number" id="c-jr" value="5" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
-          <div><div style="font-size:9px;color:var(--muted);margin-bottom:4px;">Chasers</div><input type="number" id="c-ch" value="7" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
-          <div><div style="font-size:9px;color:var(--muted);margin-bottom:4px;">SR Chasers</div><input type="number" id="c-sr" value="3" min="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);outline:none;text-align:center;"/></div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Leads / Agent</div>
-          <input type="number" id="c-leads" value="75" min="1" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--accent);outline:none;"/>
-        </div>
-        <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">DO Target / Agent</div>
-          <input type="number" id="c-do-agent" value="20" min="1" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--accent2);outline:none;"/>
-        </div>
-      </div>
-      <!-- Required conv% per role -->
-      <div style="padding:10px 14px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--faint);text-transform:uppercase;margin-bottom:7px;">Required Conv% to Hit DO Target per Agent</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
-          <div style="text-align:center;padding:6px;background:var(--surface);border-radius:6px;border:1px solid rgba(200,176,128,0.25);"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);margin-bottom:3px;">JR Conv%</div><div id="c-jr-req-conv" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:var(--accent);">—</div></div>
-          <div style="text-align:center;padding:6px;background:var(--surface);border-radius:6px;border:1px solid rgba(90,144,232,0.25);"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);margin-bottom:3px;">Chaser Conv%</div><div id="c-ch-req-conv" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#5a90e8;">—</div></div>
-          <div style="text-align:center;padding:6px;background:var(--surface);border-radius:6px;border:1px solid rgba(94,200,122,0.25);"><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);margin-bottom:3px;">SR Conv%</div><div id="c-sr-req-conv" style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#5ec87a;">—</div></div>
-        </div>
-      </div>
+  <div class="fu headline" style="font-size:clamp(20px,2.6vw,36px);margin-bottom:6px;">Input Your Numbers<br/><span class="hl">Get Instant Targets</span></div>
+
+  <!-- Action buttons row -->
+  <div class="fu" style="display:flex;align-items:center;gap:8px;width:100%;max-width:960px;margin-bottom:8px;">
+    <button onclick="resetCalc()" style="display:flex;align-items:center;gap:5px;padding:5px 13px;border-radius:7px;border:1px solid rgba(224,96,128,0.4);background:rgba(224,96,128,0.08);color:#e06080;font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:700;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='rgba(224,96,128,0.18)'" onmouseout="this.style.background='rgba(224,96,128,0.08)'">↺ Reset to 0</button>
+    <button onclick="loadAvg()" style="display:flex;align-items:center;gap:5px;padding:5px 13px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:700;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">⊕ Load AVG defaults</button>
+    <div style="font-size:8.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;flex:1;">Start from 0 — enter your actual numbers. Hover <span style="border:1px solid var(--border);padding:0 4px;border-radius:3px;">?</span> for details on each field.</div>
+    <div style="display:flex;gap:4px;">
+      <button onclick="setCalcMode('min')" id="mode-min" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s;">MIN</button>
+      <button onclick="setCalcMode('avg')" id="mode-avg" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 8px;border-radius:5px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);cursor:pointer;transition:all 0.2s;">AVG</button>
+      <button onclick="setCalcMode('max')" id="mode-max" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s;">MAX</button>
     </div>
-    <div style="display:flex;flex-direction:column;gap:9px;">
-      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;">Expected DOs per Role</div>
-          <div style="display:flex;gap:4px;">
-            <button onclick="setCalcMode('min')" id="mode-min" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s;">MIN</button>
-            <button onclick="setCalcMode('avg')" id="mode-avg" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);cursor:pointer;transition:all 0.2s;">AVG</button>
-            <button onclick="setCalcMode('max')" id="mode-max" style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:700;padding:3px 9px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all 0.2s;">MAX</button>
+  </div>
+
+  <div class="fu" style="width:100%;max-width:960px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+    <!-- LEFT: Inputs -->
+    <div style="display:flex;flex-direction:column;gap:7px;">
+
+      <!-- Row 1: DO Target range + Agents -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+        <!-- Monthly DO Target range -->
+        <div style="padding:9px 12px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">Monthly DO Target</div>
+            <span class="c-tip" data-tip="Total DOs the whole team should produce this month. Enter a range (min → stretch) to see both scenarios." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;">
+            <input type="number" id="c-do-target-from" value="0" min="0" placeholder="0" oninput="calcTeam()" style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 6px;font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:var(--accent);outline:none;text-align:center;"/>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);">→</span>
+            <input type="number" id="c-do-target" value="0" min="0" placeholder="0" oninput="calcTeam()" style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 6px;font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:var(--accent2);outline:none;text-align:center;"/>
+          </div>
+          <div style="font-size:7.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;margin-top:3px;">min target → stretch target</div>
+        </div>
+        <!-- Leads range -->
+        <div style="padding:9px 12px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">Leads / Agent</div>
+            <span class="c-tip" data-tip="Number of leads each agent receives per month. Standard range is 60 → 80. The calculator shows DOs for both scenarios." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;">
+            <input type="number" id="c-leads-from" value="0" min="0" placeholder="0" oninput="calcTeam()" style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 6px;font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:var(--accent);outline:none;text-align:center;"/>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);">→</span>
+            <input type="number" id="c-leads-to" value="0" min="0" placeholder="0" oninput="calcTeam()" style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 6px;font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:var(--accent2);outline:none;text-align:center;"/>
+          </div>
+          <div style="font-size:7.5px;color:var(--faint);font-family:'IBM Plex Mono',monospace;margin-top:3px;">from leads → to leads</div>
+        </div>
+      </div>
+
+      <!-- Row 2: Agents per role -->
+      <div style="padding:9px 12px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:5px;margin-bottom:6px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">Agents per Role</div>
+          <span class="c-tip" data-tip="Number of agents currently active in each role. JR = Month 1-3. Chaser = Month 3+. SR = 6+ months." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;">
+          <div>
+            <div style="font-size:8.5px;color:rgba(200,176,128,0.7);margin-bottom:3px;font-family:'IBM Plex Mono',monospace;">JR Chasers</div>
+            <input type="number" id="c-jr" value="0" min="0" placeholder="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid rgba(200,176,128,0.25);border-radius:6px;padding:6px 8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--text);outline:none;text-align:center;"/>
+          </div>
+          <div>
+            <div style="font-size:8.5px;color:rgba(90,144,232,0.7);margin-bottom:3px;font-family:'IBM Plex Mono',monospace;">Chasers</div>
+            <input type="number" id="c-ch" value="0" min="0" placeholder="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid rgba(90,144,232,0.25);border-radius:6px;padding:6px 8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--text);outline:none;text-align:center;"/>
+          </div>
+          <div>
+            <div style="font-size:8.5px;color:rgba(94,200,122,0.7);margin-bottom:3px;font-family:'IBM Plex Mono',monospace;">SR Chasers</div>
+            <input type="number" id="c-sr" value="0" min="0" placeholder="0" oninput="calcTeam()" style="width:100%;background:var(--surface);border:1px solid rgba(94,200,122,0.25);border-radius:6px;padding:6px 8px;font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--text);outline:none;text-align:center;"/>
           </div>
         </div>
-        <!-- S11 tier tables — same engine as S5 but read-only display -->
-        <div id="s11-results" style="display:flex;flex-direction:column;gap:5px;"></div>
       </div>
-      <div style="padding:12px 15px;border-radius:12px;background:var(--surface);border:1px solid var(--border);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:9px;">Team Totals</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-          <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);margin-bottom:4px;">TOTAL LEADS</div>
-            <div id="r-total-leads" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--text);">—</div>
+
+      <!-- Row 3: DO target per agent range + Required conv% -->
+      <div style="padding:9px 12px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:5px;margin-bottom:6px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">DO Target / Agent</div>
+          <span class="c-tip" data-tip="How many DOs you expect per agent. Enter min → stretch range. The calculator shows the required Conv% for each scenario." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:5px;align-items:center;margin-bottom:7px;">
+          <input type="number" id="c-do-agent-from" value="0" min="0" placeholder="0" oninput="calcTeam()" style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 6px;font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:var(--accent);outline:none;text-align:center;"/>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint);text-align:center;">→</span>
+          <input type="number" id="c-do-agent-to" value="0" min="0" placeholder="0" oninput="calcTeam()" style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 6px;font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:var(--accent2);outline:none;text-align:center;"/>
+        </div>
+        <!-- Required conv% as range -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;">
+          <div style="text-align:center;padding:5px 4px;background:var(--surface);border-radius:5px;border:1px solid rgba(200,176,128,0.2);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);margin-bottom:2px;">JR Conv%</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:3px;">
+              <span id="c-jr-req-conv-from" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);">—</span>
+              <span style="font-size:8px;color:var(--faint);">→</span>
+              <span id="c-jr-req-conv-to" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--accent2);">—</span>
+            </div>
           </div>
-          <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
-            <div id="r-total-avg-label" style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);margin-bottom:4px;">TEAM DOs (AVG)</div>
-            <div id="r-total-avg" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--accent);">—</div>
+          <div style="text-align:center;padding:5px 4px;background:var(--surface);border-radius:5px;border:1px solid rgba(90,144,232,0.2);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);margin-bottom:2px;">Chaser Conv%</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:3px;">
+              <span id="c-ch-req-conv-from" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#5a90e8;">—</span>
+              <span style="font-size:8px;color:var(--faint);">→</span>
+              <span id="c-ch-req-conv-to" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#82b0f4;">—</span>
+            </div>
           </div>
-          <div id="feasibility-box" style="text-align:center;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);margin-bottom:4px;">TARGET GAP</div>
-            <div id="r-gap" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;">—</div>
-            <div id="r-gap-label" style="font-family:'IBM Plex Mono',monospace;font-size:8px;margin-top:2px;"></div>
+          <div style="text-align:center;padding:5px 4px;background:var(--surface);border-radius:5px;border:1px solid rgba(94,200,122,0.2);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);margin-bottom:2px;">SR Conv%</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:3px;">
+              <span id="c-sr-req-conv-from" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#5ec87a;">—</span>
+              <span style="font-size:8px;color:var(--faint);">→</span>
+              <span id="c-sr-req-conv-to" style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:#84dca0;">—</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Tooltip box -->
+      <div id="calc-tooltip-box" style="padding:8px 12px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);min-height:36px;font-size:10px;color:var(--faint);font-family:'IBM Plex Mono',monospace;display:flex;align-items:center;">Hover ? icons to see what each field calculates.</div>
+    </div>
+
+    <!-- RIGHT: Results -->
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <!-- Expected DOs per role -->
+      <div style="padding:9px 12px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">
+          <div style="display:flex;align-items:center;gap:5px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">Expected DOs per Role</div>
+            <span class="c-tip" data-tip="DOs = Leads × Conv%. Shows range from leads-min to leads-max for each role. MIN/AVG/MAX switches the conv% scenario used." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span>
+          </div>
+        </div>
+        <div id="s11-results" style="display:flex;flex-direction:column;gap:4px;"></div>
+      </div>
+
+      <!-- Team totals -->
+      <div style="padding:9px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:5px;margin-bottom:7px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;">Team Totals</div>
+          <span class="c-tip" data-tip="Total across all agents: leads needed, DOs expected (range), and gap vs your team target. Green = surplus, Red = shortfall." style="width:14px;height:14px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">?</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;">
+          <div style="text-align:center;padding:8px 6px;background:var(--surface2);border-radius:7px;border:1px solid var(--border);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);margin-bottom:3px;">TOTAL LEADS</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <span id="r-total-leads-from" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:var(--text);">—</span>
+              <span style="font-size:9px;color:var(--faint);">→</span>
+              <span id="r-total-leads-to" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:var(--accent);">—</span>
+            </div>
+          </div>
+          <div style="text-align:center;padding:8px 6px;background:var(--surface2);border-radius:7px;border:1px solid var(--border);">
+            <div id="r-total-avg-label" style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);margin-bottom:3px;">TEAM DOs (AVG)</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+              <span id="r-total-avg-from" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:var(--accent);">—</span>
+              <span style="font-size:9px;color:var(--faint);">→</span>
+              <span id="r-total-avg" style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:var(--accent2);">—</span>
+            </div>
+          </div>
+          <div id="feasibility-box" style="text-align:center;padding:8px 6px;background:var(--surface2);border-radius:7px;border:1px solid var(--border);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);margin-bottom:3px;">TARGET GAP</div>
+            <div id="r-gap" style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;">—</div>
+            <div id="r-gap-label" style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;margin-top:1px;"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- Recovery targets -->
-      <div style="padding:12px 15px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Recovery Plan — Overall Conv% Targets</div>
+      <div style="padding:9px 12px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:7px;">Recovery Plan — Conv% Targets</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
-          <div style="padding:8px;background:var(--surface);border-radius:8px;border:1px solid rgba(224,96,128,0.2);text-align:center;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">MONTH 1</div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#e06080;">25%</div><div style="font-size:9px;color:var(--muted);">Recovery floor</div></div>
-          <div style="padding:8px;background:var(--surface);border-radius:8px;border:1px solid rgba(251,146,60,0.3);text-align:center;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">MONTH 2</div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#fb923c;">30%</div><div style="font-size:9px;color:var(--muted);">Trend confirm</div></div>
-          <div style="padding:8px;background:var(--surface);border-radius:8px;border:1px solid rgba(94,200,122,0.3);text-align:center;"><div style="font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);">MONTH 3</div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#5ec87a;">35%+</div><div style="font-size:9px;color:var(--muted);">Stretch goal</div></div>
+          <div style="padding:7px;background:var(--surface);border-radius:7px;border:1px solid rgba(224,96,128,0.2);text-align:center;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);">MONTH 1</div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:#e06080;">25%</div>
+            <div style="font-size:8px;color:var(--muted);">Recovery floor</div>
+          </div>
+          <div style="padding:7px;background:var(--surface);border-radius:7px;border:1px solid rgba(251,146,60,0.3);text-align:center;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);">MONTH 2</div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:#fb923c;">30%</div>
+            <div style="font-size:8px;color:var(--muted);">Trend confirm</div>
+          </div>
+          <div style="padding:7px;background:var(--surface);border-radius:7px;border:1px solid rgba(94,200,122,0.3);text-align:center;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:6.5px;color:var(--faint);">MONTH 3</div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:#5ec87a;">35%+</div>
+            <div style="font-size:8px;color:var(--muted);">Stretch goal</div>
+          </div>
         </div>
       </div>
     </div>
@@ -714,7 +836,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-from,#0d0c0a);color:va
   <div class="nav-dots" id="navDots"></div>
   <div class="nav-arrows">
     <button class="nav-btn" id="prevBtn">←</button>
-    <span class="nav-counter" id="counter">1 / 14</span>
+    <span class="nav-counter" id="counter">1 / 13</span>
     <button class="nav-btn" id="nextBtn">→</button>
   </div>
 </div>
@@ -724,7 +846,7 @@ const THEMES={warm:'radial-gradient(ellipse 110% 65% at 72% 8%,#c8782012 0%,tran
 
 const slideEls=Array.from(document.querySelectorAll('.slide'));
 const total=slideEls.length;
-let cur=0,busy=false;
+let cur=0;
 
 const dotsEl=document.getElementById('navDots');
 slideEls.forEach((_,i)=>{const d=document.createElement('button');d.className='nav-dot'+(i===0?' active':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d);});
@@ -732,7 +854,23 @@ slideEls.forEach((_,i)=>{const d=document.createElement('button');d.className='n
 function triggerCountUps(el){el.querySelectorAll('.count-up').forEach(e=>{const target=parseInt(e.dataset.target)||0;const dur=1400;const start=performance.now();const tick=now=>{const p=Math.min((now-start)/dur,1);const ease=1-Math.pow(1-p,3);e.textContent=Math.round(ease*target);if(p<1)requestAnimationFrame(tick);};requestAnimationFrame(tick);});}
 function triggerBars(el){el.querySelectorAll('.prog-bar-fill').forEach(e=>{const w=e.dataset.width||0;setTimeout(()=>e.style.width=w+'%',100);});}
 
-function activate(idx){if(busy)return;busy=true;const prev=slideEls[cur];prev.classList.add('exit');setTimeout(()=>prev.classList.remove('active','exit'),350);cur=idx;const el=slideEls[cur];const t=el.dataset.theme||'stone';document.getElementById('bg').style.background=THEMES[t];document.body.setAttribute('data-theme',t);el.classList.add('active');el.querySelectorAll('.fu').forEach(f=>{f.style.animation='none';void f.offsetWidth;f.style.animation='';});triggerCountUps(el);triggerBars(el);document.getElementById('progFill').style.width=((cur/(total-1))*100)+'%';dotsEl.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));document.getElementById('counter').textContent=(cur+1)+' / '+total;setTimeout(()=>busy=false,600);}
+function activate(idx){
+  const prev=slideEls[cur];
+  prev.classList.add('exit');
+  setTimeout(()=>prev.classList.remove('active','exit'),350);
+  cur=idx;
+  const el=slideEls[cur];
+  const t=el.dataset.theme||'stone';
+  document.getElementById('bg').style.background=THEMES[t];
+  document.body.setAttribute('data-theme',t);
+  el.classList.add('active');
+  el.querySelectorAll('.fu').forEach(f=>{f.style.animation='none';void f.offsetWidth;f.style.animation='';});
+  try{triggerCountUps(el);}catch(e){}
+  try{triggerBars(el);}catch(e){}
+  document.getElementById('progFill').style.width=((cur/(total-1))*100)+'%';
+  dotsEl.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
+  document.getElementById('counter').textContent=(cur+1)+' / '+total;
+}
 
 window.goTo=i=>{if(i!==cur&&i>=0&&i<total)activate(i);};
 document.getElementById('prevBtn').onclick=()=>goTo(cur-1);
@@ -743,70 +881,122 @@ document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:tr
 document.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>48)goTo(dx<0?cur+1:cur-1);tx=null;},{passive:true});
 
 // ═══════════════════════════════════════════════
-// SLIDE 5 — FLEXIBLE TIER SYSTEM
+// SLIDE 4 — FLEXIBLE TIER SYSTEM (FROM → TO)
 // ═══════════════════════════════════════════════
 const S5_DEFAULTS = {
   jr: [
-    {label:'Month 1 — Start', conv:10},
+    {label:'Month 1 — Start',   conv:10},
     {label:'Month 2 — Improving', conv:15},
-    {label:'Month 3 — Max', conv:20},
+    {label:'Month 3 — Max',     conv:20},
   ],
   ch: [
-    {label:'Minimum', conv:20},
-    {label:'Target', conv:25},
-    {label:'Good', conv:30},
+    {label:'Minimum',   conv:20},
+    {label:'Target',    conv:25},
+    {label:'Good',      conv:30},
     {label:'Elite Max', conv:40},
   ],
   sr: [
-    {label:'Minimum', conv:25},
-    {label:'Target', conv:30},
-    {label:'SR Tier 1', conv:35},
-    {label:'40 DOs', conv:40},
-    {label:'Elite+', conv:45},
-    {label:'SR Max', conv:50},
+    {label:'Minimum',  conv:25},
+    {label:'Target',   conv:30},
+    {label:'SR Tier 1',conv:35},
+    {label:'40 DOs',   conv:40},
+    {label:'Elite+',   conv:45},
+    {label:'SR Max',   conv:50},
   ]
 };
 
-const s5Tiers = {jr:[...S5_DEFAULTS.jr.map(t=>({...t}))], ch:[...S5_DEFAULTS.ch.map(t=>({...t}))], sr:[...S5_DEFAULTS.sr.map(t=>({...t}))]};
+const s5Tiers = {
+  jr:[...S5_DEFAULTS.jr.map(t=>({...t}))],
+  ch:[...S5_DEFAULTS.ch.map(t=>({...t}))],
+  sr:[...S5_DEFAULTS.sr.map(t=>({...t}))]
+};
 
-function getS5Leads(){return parseInt(document.getElementById('s5-leads').value)||75;}
+// Mode: 'conv' = user enters conv%, DOs auto-calculated; 'dos' = user enters DOs, conv% auto-calculated
+let s5Mode = 'conv';
+
+window.setS5Mode = function(mode){
+  s5Mode = mode;
+  const btnConv = document.getElementById('s5-mode-conv');
+  const btnDos  = document.getElementById('s5-mode-dos');
+  if(btnConv && btnDos){
+    if(mode==='conv'){
+      btnConv.style.borderColor='var(--accent)'; btnConv.style.color='var(--accent)';
+      btnDos.style.borderColor='var(--border)';  btnDos.style.color='var(--muted)';
+    } else {
+      btnDos.style.borderColor='var(--accent)';  btnDos.style.color='var(--accent)';
+      btnConv.style.borderColor='var(--border)'; btnConv.style.color='var(--muted)';
+    }
+  }
+  calcS5();
+};
+
+function getS5LeadsFrom(){ return parseFloat(document.getElementById('s5-leads-from').value)||60; }
+function getS5LeadsTo(){   return parseFloat(document.getElementById('s5-leads-to').value)||80; }
 
 function renderS5Tiers(role){
-  const container=document.getElementById('s5-'+role+'-tiers');
-  if(!container)return;
-  const L=getS5Leads();
-  container.innerHTML='';
-  s5Tiers[role].forEach((tier,i)=>{
-    const dos=Math.round(L*tier.conv/100);
-    const row=document.createElement('div');
-    row.style.cssText='display:grid;grid-template-columns:1fr 58px 38px 22px;gap:3px 4px;align-items:center;padding:4px 7px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);';
-    row.innerHTML=`
-      <input value="${tier.label}" onchange="s5Tiers['${role}'][${i}].label=this.value" style="background:transparent;border:none;color:var(--text);font-size:10px;font-family:'DM Sans',sans-serif;outline:none;width:100%;padding:1px 2px;"/>
-      <input type="number" value="${tier.conv}" min="1" max="100" onchange="s5Tiers['${role}'][${i}].conv=parseFloat(this.value)||0;calcS5()" style="background:transparent;border:none;color:var(--accent);font-size:10px;font-family:'IBM Plex Mono',monospace;outline:none;width:100%;text-align:center;padding:1px 2px;"/>
-      <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:var(--accent2);text-align:center;">${dos}</div>
-      <button onclick="removeTierRow('${role}',${i})" style="width:20px;height:20px;border-radius:4px;border:none;background:rgba(224,96,128,0.15);color:#e06080;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(224,96,128,0.35)'" onmouseout="this.style.background='rgba(224,96,128,0.15)'">×</button>
-    `;
+  const container = document.getElementById('s5-'+role+'-tiers');
+  if(!container) return;
+  const Lf = getS5LeadsFrom();
+  const Lt = getS5LeadsTo();
+  container.innerHTML = '';
+  s5Tiers[role].forEach((tier, i) => {
+    const dosFrom = Math.round(Lf * tier.conv / 100);
+    const dosTo   = Math.round(Lt * tier.conv / 100);
+    const row = document.createElement('div');
+    row.style.cssText = 'display:grid;grid-template-columns:1fr 52px 52px 52px 52px 22px;gap:3px 3px;align-items:center;padding:4px 6px;border-radius:6px;background:var(--surface2);border:1px solid var(--border);';
+
+    if(s5Mode === 'conv'){
+      // User edits conv% → DOs auto-shown (from & to)
+      row.innerHTML = `
+        <input value="${tier.label}" onchange="s5Tiers['${role}'][${i}].label=this.value" style="background:transparent;border:none;color:var(--text);font-size:10px;font-family:'DM Sans',sans-serif;outline:none;width:100%;padding:1px 2px;"/>
+        <input type="number" value="${tier.conv}" min="0" max="100" step="0.5"
+          onchange="s5Tiers['${role}'][${i}].conv=parseFloat(this.value)||0;calcS5()"
+          style="background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--accent);font-size:10px;font-family:'IBM Plex Mono',monospace;outline:none;width:100%;text-align:center;padding:1px 2px;"/>
+        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:var(--accent);text-align:center;">${dosFrom}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);text-align:center;">${tier.conv}%</div>
+        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:var(--accent2);text-align:center;">${dosTo}</div>
+        <button onclick="removeTierRow('${role}',${i})" style="width:18px;height:18px;border-radius:3px;border:none;background:rgba(224,96,128,0.15);color:#e06080;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='rgba(224,96,128,0.35)'" onmouseout="this.style.background='rgba(224,96,128,0.15)'">×</button>`;
+    } else {
+      // User edits DOs (from scenario) → conv% auto-shown
+      const dosFromVal = tier.dosFrom !== undefined ? tier.dosFrom : dosFrom;
+      row.innerHTML = `
+        <input value="${tier.label}" onchange="s5Tiers['${role}'][${i}].label=this.value" style="background:transparent;border:none;color:var(--text);font-size:10px;font-family:'DM Sans',sans-serif;outline:none;width:100%;padding:1px 2px;"/>
+        <input type="number" value="${dosFromVal}" min="0" step="1"
+          onchange="s5Tiers['${role}'][${i}].dosFrom=parseInt(this.value)||0; s5Tiers['${role}'][${i}].conv=getS5LeadsFrom()>0?(parseInt(this.value)||0)/getS5LeadsFrom()*100:0; calcS5()"
+          style="background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--accent);font-size:10px;font-family:'Playfair Display',serif;font-weight:800;outline:none;width:100%;text-align:center;padding:1px 2px;"/>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);text-align:center;">${Lf>0?(dosFromVal/Lf*100).toFixed(1):0}%</div>
+        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:900;color:var(--accent2);text-align:center;">${dosTo}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);text-align:center;">${tier.conv.toFixed(1)}%</div>
+        <button onclick="removeTierRow('${role}',${i})" style="width:18px;height:18px;border-radius:3px;border:none;background:rgba(224,96,128,0.15);color:#e06080;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;" onmouseover="this.style.background='rgba(224,96,128,0.35)'" onmouseout="this.style.background='rgba(224,96,128,0.15)'">×</button>`;
+    }
     container.appendChild(row);
   });
+
+  // Update column header labels per mode
+  const h1 = document.getElementById('s5-'+role+'-h1');
+  const h2 = document.getElementById('s5-'+role+'-h2');
+  if(h1) h1.textContent = s5Mode==='conv' ? 'Conv%' : 'DOs (from)';
+  if(h2) h2.textContent = s5Mode==='conv' ? 'Conv%' : 'Conv% (from)';
 }
 
 function calcS5(){
-  ['jr','ch','sr'].forEach(role=>renderS5Tiers(role));
+  ['jr','ch','sr'].forEach(role => renderS5Tiers(role));
+  calcTeam(); // keep S10 in sync
 }
 
-window.addTierRow=function(role){
+window.addTierRow = function(role){
   s5Tiers[role].push({label:'New Tier', conv:0});
   renderS5Tiers(role);
 };
 
-window.removeTierRow=function(role,idx){
-  if(s5Tiers[role].length<=1)return;
-  s5Tiers[role].splice(idx,1);
+window.removeTierRow = function(role, idx){
+  if(s5Tiers[role].length <= 1) return;
+  s5Tiers[role].splice(idx, 1);
   renderS5Tiers(role);
 };
 
 // ═══════════════════════════════════════════════
-// SLIDE 11 — TEAM CALCULATOR
+// SLIDE 10 — TEAM CALCULATOR (FROM → TO RANGES)
 // ═══════════════════════════════════════════════
 let calcMode='avg';
 function setCalcMode(mode){
@@ -821,58 +1011,67 @@ function setCalcMode(mode){
 }
 
 function calcTeam(){
-  const doTarget=parseInt(document.getElementById('c-do-target').value)||0;
-  const jr=parseInt(document.getElementById('c-jr').value)||0;
-  const ch=parseInt(document.getElementById('c-ch').value)||0;
-  const sr=parseInt(document.getElementById('c-sr').value)||0;
-  const leads=parseInt(document.getElementById('c-leads').value)||75;
-  const doAgent=parseInt(document.getElementById('c-do-agent').value)||0;
+  const doTarget   = parseInt(document.getElementById('c-do-target').value)||0;
+  const jr         = parseInt(document.getElementById('c-jr').value)||0;
+  const ch         = parseInt(document.getElementById('c-ch').value)||0;
+  const sr         = parseInt(document.getElementById('c-sr').value)||0;
+  const leadsFrom  = parseFloat(document.getElementById('c-leads-from').value)||60;
+  const leadsTo    = parseFloat(document.getElementById('c-leads-to').value)||80;
+  const doAgentFrom= parseFloat(document.getElementById('c-do-agent-from').value)||15;
+  const doAgentTo  = parseFloat(document.getElementById('c-do-agent-to').value)||20;
 
-  // Use current S5 tiers to compute min/avg/max per role
-  const getStats=(role)=>{
+  // Use FROM leads as base for stats, TO leads for upper range
+  const getStats=(role, L)=>{
     const trs=s5Tiers[role];
-    if(!trs||trs.length===0)return{min:0,avg:0,max:0};
+    if(!trs||trs.length===0)return{min:0,avg:0,max:0,minC:0,avgC:0,maxC:0};
     const convs=trs.map(t=>t.conv).filter(c=>c>0);
-    if(convs.length===0)return{min:0,avg:0,max:0};
+    if(convs.length===0)return{min:0,avg:0,max:0,minC:0,avgC:0,maxC:0};
     const minC=Math.min(...convs);
     const maxC=Math.max(...convs);
     const avgC=convs.reduce((a,b)=>a+b,0)/convs.length;
     return{
-      min:Math.round(leads*minC/100),
-      avg:Math.round(leads*avgC/100),
-      max:Math.round(leads*maxC/100),
-      minC,avgC,maxC
+      min:Math.round(L*minC/100), avg:Math.round(L*avgC/100), max:Math.round(L*maxC/100),
+      minC, avgC, maxC
     };
   };
 
-  const jrS=getStats('jr');
-  const chS=getStats('ch');
-  const srS=getStats('sr');
+  const jrF=getStats('jr',leadsFrom); const jrT=getStats('jr',leadsTo);
+  const chF=getStats('ch',leadsFrom); const chT=getStats('ch',leadsTo);
+  const srF=getStats('sr',leadsFrom); const srT=getStats('sr',leadsTo);
 
   const mode=calcMode||'avg';
-  const totalMode=(jr*jrS[mode])+(ch*chS[mode])+(sr*srS[mode]);
+  const totalModeFrom=(jr*jrF[mode])+(ch*chF[mode])+(sr*srF[mode]);
+  const totalModeTo  =(jr*jrT[mode])+(ch*chT[mode])+(sr*srT[mode]);
   const totalAgents=jr+ch+sr;
-  const totalLeads=totalAgents*leads;
-  const gap=totalMode-doTarget;
+  const totalLeadsFrom=totalAgents*leadsFrom;
+  const totalLeadsTo  =totalAgents*leadsTo;
+  const gap=totalModeFrom-doTarget;
 
-  // Build results display
+  // Build results display (from → to)
   const resultsEl=document.getElementById('s11-results');
   if(resultsEl){
     resultsEl.innerHTML=`
-      <div style="display:grid;grid-template-columns:90px 1fr 1fr 1fr 1fr;gap:4px 6px;font-family:'IBM Plex Mono',monospace;font-size:7.5px;color:var(--faint);padding-bottom:5px;border-bottom:1px solid var(--border);">
-        <div></div><div style="text-align:center;">MIN</div><div style="text-align:center;">AVG</div><div style="text-align:center;">MAX</div><div style="text-align:center;color:var(--accent);">MODE(${mode.toUpperCase()})</div>
+      <div style="display:grid;grid-template-columns:90px 1fr 1fr 1fr 1fr;gap:4px 6px;font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);padding-bottom:5px;border-bottom:1px solid var(--border);">
+        <div></div>
+        <div style="text-align:center;">MIN (from→to)</div>
+        <div style="text-align:center;">AVG (from→to)</div>
+        <div style="text-align:center;">MAX (from→to)</div>
+        <div style="text-align:center;color:var(--accent);">MODE: ${mode.toUpperCase()}</div>
       </div>
-      ${buildResultRow('JR','rgba(200,176,128,0.8)',jr,jrS,mode)}
-      ${buildResultRow('Chaser','rgba(90,144,232,0.9)',ch,chS,mode)}
-      ${buildResultRow('SR','rgba(94,200,122,0.9)',sr,srS,mode)}
+      ${buildResultRow('JR','rgba(200,176,128,0.8)',jr,jrF,jrT,mode)}
+      ${buildResultRow('Chaser','rgba(90,144,232,0.9)',ch,chF,chT,mode)}
+      ${buildResultRow('SR','rgba(94,200,122,0.9)',sr,srF,srT,mode)}
     `;
   }
 
   const setEl=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-  setEl('r-total-leads',totalLeads);
-  setEl('r-total-avg',totalMode);
+  setEl('r-total-leads-from', totalLeadsFrom);
+  setEl('r-total-leads-to',   totalLeadsTo);
+  setEl('r-total-avg-from',   totalModeFrom);
+  setEl('r-total-avg',        totalModeTo);
+
   const avgLbl=document.getElementById('r-total-avg-label');
-  if(avgLbl)avgLbl.textContent='TEAM DOs ('+mode.toUpperCase()+')';
+  if(avgLbl)avgLbl.textContent='TEAM DOs RANGE ('+mode.toUpperCase()+')';
 
   const gapEl=document.getElementById('r-gap');
   const gapLbl=document.getElementById('r-gap-label');
@@ -888,21 +1087,25 @@ function calcTeam(){
     if(fbox)fbox.style.borderColor='rgba(224,96,128,0.3)';
   }
 
-  const reqConv=(dos)=>leads>0?(dos/leads*100).toFixed(1)+'%':'—';
-  setEl('c-jr-req-conv',doAgent>0?reqConv(doAgent):'—');
-  setEl('c-ch-req-conv',doAgent>0?reqConv(doAgent):'—');
-  setEl('c-sr-req-conv',doAgent>0?reqConv(doAgent):'—');
+  // Conv% range required to hit DO from/to
+  const reqC=(dos,L)=>L>0?(dos/L*100).toFixed(1)+'%':'—';
+  setEl('c-jr-req-conv-from',  doAgentFrom>0?reqC(doAgentFrom,leadsFrom):'—');
+  setEl('c-jr-req-conv-to',    doAgentTo>0  ?reqC(doAgentTo,  leadsTo):  '—');
+  setEl('c-ch-req-conv-from',  doAgentFrom>0?reqC(doAgentFrom,leadsFrom):'—');
+  setEl('c-ch-req-conv-to',    doAgentTo>0  ?reqC(doAgentTo,  leadsTo):  '—');
+  setEl('c-sr-req-conv-from',  doAgentFrom>0?reqC(doAgentFrom,leadsFrom):'—');
+  setEl('c-sr-req-conv-to',    doAgentTo>0  ?reqC(doAgentTo,  leadsTo):  '—');
 }
 
-function buildResultRow(label,color,count,stats,mode){
-  const highlight=(v)=>`<span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:var(--accent);">${v}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div>`;
-  const modeVal=stats[mode]||0;
+function buildResultRow(label, color, count, statsF, statsT, mode){
+  const mF=statsF[mode]||0;
+  const mT=statsT[mode]||0;
   return `<div style="display:grid;grid-template-columns:90px 1fr 1fr 1fr 1fr;gap:4px 6px;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
     <div style="font-size:10px;color:var(--muted);">${label} <span style="color:${color};">(×${count})</span></div>
-    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--muted);">${count*stats.min}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div></div>
-    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--accent);">${count*Math.round(stats.avg)}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div></div>
-    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--accent2);">${count*stats.max}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div></div>
-    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:var(--accent);">${count*modeVal}</span><div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--faint);">DOs</div></div>
+    <div style="text-align:center;font-size:11px;color:var(--muted);">${count*statsF.min}<span style="font-size:9px;color:var(--faint);">→</span>${count*statsT.min}</div>
+    <div style="text-align:center;font-size:11px;color:var(--accent);">${count*Math.round(statsF.avg)}<span style="font-size:9px;color:var(--faint);">→</span>${count*Math.round(statsT.avg)}</div>
+    <div style="text-align:center;font-size:11px;color:var(--accent2);">${count*statsF.max}<span style="font-size:9px;color:var(--faint);">→</span>${count*statsT.max}</div>
+    <div style="text-align:center;"><span style="font-family:'Playfair Display',serif;font-size:15px;font-weight:900;color:var(--accent);">${count*mF}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--faint);">→</span><span style="font-family:'Playfair Display',serif;font-size:15px;font-weight:900;color:var(--accent2);">${count*mT}</span></div>
   </div>`;
 }
 
@@ -915,7 +1118,7 @@ function calcS12(){
   const jrM3=parseInt(document.getElementById('s12-jr-m3').value)||16;
   const ch=parseInt(document.getElementById('s12-ch').value)||19;
   const sr=parseInt(document.getElementById('s12-sr').value)||26;
-  const leads=parseInt(document.getElementById('c-leads').value)||75;
+  const leads=Math.round(((parseFloat(document.getElementById('s5-leads-from').value)||60)+(parseFloat(document.getElementById('s5-leads-to').value)||80))/2);
 
   const convFmt=(dos)=>leads>0?((dos/leads)*100).toFixed(1)+'%':'—';
   const fmt=(n)=>Math.round(n);
@@ -1044,24 +1247,25 @@ function calcS12(){
 // PRINT A4 TIER SHEET
 // ═══════════════════════════════════════════════
 function printTierSheet(){
-  const L=getS5Leads();
+  const Lf=getS5LeadsFrom();
+  const Lt=getS5LeadsTo();
+  const L=Math.round((Lf+Lt)/2); // midpoint for summary display
   const now=new Date();
   const dateStr=now.toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
 
-  const buildRoleTable=(role,label,color)=>{
+  const buildRoleTable=(role,label)=>{
     const tiers=s5Tiers[role];
     const rows=tiers.map((t,i)=>{
-      const dos=Math.round(L*t.conv/100);
-      const isMin=i===0;
-      const isTarget=t.label.toLowerCase().includes('target')||t.label.toLowerCase().includes('month 3')||t.label.toLowerCase().includes('mo.3');
+      const dosFrom=Math.round(Lf*t.conv/100);
+      const dosTo  =Math.round(Lt*t.conv/100);
       const isMax=i===tiers.length-1;
-      let rowStyle='';
-      if(isMax) rowStyle='font-weight:800;border-top:1.5px solid #333;';
-      else if(isTarget) rowStyle='font-weight:700;';
+      const isTarget=t.label.toLowerCase().includes('target')||t.label.toLowerCase().includes('month 3');
+      let rowStyle=isMax?'font-weight:800;border-top:1.5px solid #333;':isTarget?'font-weight:700;':'';
       return `<tr style="${rowStyle}">
         <td style="padding:4px 8px;border:0.5px solid #ccc;">${t.label}</td>
         <td style="padding:4px 8px;border:0.5px solid #ccc;text-align:center;font-family:monospace;">${t.conv}%</td>
-        <td style="padding:4px 8px;border:0.5px solid #ccc;text-align:center;font-weight:${isMax||isTarget?'800':'600'};">${dos}</td>
+        <td style="padding:4px 8px;border:0.5px solid #ccc;text-align:center;font-weight:${isMax||isTarget?'800':'600'};">${dosFrom}</td>
+        <td style="padding:4px 8px;border:0.5px solid #ccc;text-align:center;font-weight:${isMax||isTarget?'800':'600'};">${dosTo}</td>
       </tr>`;
     }).join('');
     return `
@@ -1072,7 +1276,8 @@ function printTierSheet(){
             <tr style="background:#111;color:#fff;">
               <th style="padding:4px 8px;text-align:left;font-weight:700;">Level</th>
               <th style="padding:4px 8px;text-align:center;font-weight:700;">Conv%</th>
-              <th style="padding:4px 8px;text-align:center;font-weight:700;">DOs</th>
+              <th style="padding:4px 8px;text-align:center;font-weight:700;">DOs (${Lf} leads)</th>
+              <th style="padding:4px 8px;text-align:center;font-weight:700;">DOs (${Lt} leads)</th>
             </tr>
           </thead>
           <tbody>${rows}</tbody>
@@ -1094,22 +1299,44 @@ function printTierSheet(){
       </table>
     </div>`;
 
-  // Escalation plan (Weekly)
+  // Escalation plan — 45-day gates from recovery plan
+  const _ch=parseInt(document.getElementById('s12-ch')?document.getElementById('s12-ch').value:19)||19;
+  const _sr=parseInt(document.getElementById('s12-sr')?document.getElementById('s12-sr').value:26)||26;
+  const _jrM1=parseInt(document.getElementById('s12-jr-m1')?document.getElementById('s12-jr-m1').value:8)||8;
+  const _jrM2=parseInt(document.getElementById('s12-jr-m2')?document.getElementById('s12-jr-m2').value:12)||12;
+  const _jrM3=parseInt(document.getElementById('s12-jr-m3')?document.getElementById('s12-jr-m3').value:16)||16;
+  const gates45=[
+    {range:'Day 1–7',   pct:0.15, action:'Alert — TL reviews first-touch compliance, fax speed, untouched leads'},
+    {range:'Day 8–14',  pct:0.31, action:'Alert + 1-on-1 — Day 14 Early Signal Review. Idle leads transferred to SR'},
+    {range:'Day 15–22', pct:0.50, action:'Underperformance Plan — mandatory daily coaching, reduced lead load'},
+    {range:'Day 23–30', pct:0.67, action:'Action Plan — Day 30 Corrective Review. 2nd miss = Final Action Plan'},
+    {range:'Day 31–45', pct:1.00, action:'Final Review — Day 45. Reward / PIP / Exit / Source decisions'},
+  ];
   const escHTML=`
     <div style="break-inside:avoid;">
-      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#555;margin-bottom:4px;font-family:monospace;">Weekly Escalation — Chaser (${document.getElementById('s12-ch')?document.getElementById('s12-ch').value:19} DOs target) · SR (${document.getElementById('s12-sr')?document.getElementById('s12-sr').value:26} DOs target)</div>
-      <table style="width:100%;border-collapse:collapse;font-size:9.5px;">
-        <thead><tr style="background:#111;color:#fff;"><th style="padding:4px 8px;text-align:left;">Week</th><th style="padding:4px 8px;text-align:center;">% of Min</th><th style="padding:4px 8px;text-align:center;">Chaser DOs</th><th style="padding:4px 8px;text-align:center;">SR DOs</th><th style="padding:4px 8px;text-align:left;">Action if Missed</th></tr></thead>
+      <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.12em;color:#555;margin-bottom:4px;font-family:monospace;">45-Day Escalation Checkpoints — JR (Mo.1:${_jrM1} / Mo.2:${_jrM2} / Mo.3:${_jrM3}) · Chaser (${_ch} DOs) · SR (${_sr} DOs)</div>
+      <table style="width:100%;border-collapse:collapse;font-size:9px;">
+        <thead><tr style="background:#111;color:#fff;">
+          <th style="padding:3px 6px;text-align:left;">Gate</th>
+          <th style="padding:3px 6px;text-align:center;">% of Target</th>
+          <th style="padding:3px 6px;text-align:center;">JR Mo.1</th>
+          <th style="padding:3px 6px;text-align:center;">JR Mo.2</th>
+          <th style="padding:3px 6px;text-align:center;">JR Mo.3</th>
+          <th style="padding:3px 6px;text-align:center;">Chaser</th>
+          <th style="padding:3px 6px;text-align:center;">SR</th>
+          <th style="padding:3px 6px;text-align:left;">Action if Missed</th>
+        </tr></thead>
         <tbody>
-          ${['W1','W2','W3','W4'].map((w,i)=>{
-            const pcts=[0.25,0.50,0.75,1.00];
-            const actions=['Alert → TL reviews activity','Alert + 1-on-1 meeting','Underperformance Plan activated','Action Plan / PIP initiated'];
-            const ch=parseInt(document.getElementById('s12-ch')?document.getElementById('s12-ch').value:19)||19;
-            const sr=parseInt(document.getElementById('s12-sr')?document.getElementById('s12-sr').value:26)||26;
-            const chD=Math.round(ch*pcts[i]);
-            const srD=Math.round(sr*pcts[i]);
-            return `<tr><td style="padding:4px 8px;border:0.5px solid #ccc;font-weight:700;">${w}</td><td style="padding:4px 8px;border:0.5px solid #ccc;text-align:center;">${Math.round(pcts[i]*100)}%</td><td style="padding:4px 8px;border:0.5px solid #ccc;text-align:center;">${chD} DOs</td><td style="padding:4px 8px;border:0.5px solid #ccc;text-align:center;">${srD} DOs</td><td style="padding:4px 8px;border:0.5px solid #ccc;font-size:9px;">${actions[i]}</td></tr>`;
-          }).join('')}
+          ${gates45.map(g=>`<tr>
+            <td style="padding:3px 6px;border:0.5px solid #ccc;font-weight:700;">${g.range}</td>
+            <td style="padding:3px 6px;border:0.5px solid #ccc;text-align:center;font-family:monospace;">${Math.round(g.pct*100)}%</td>
+            <td style="padding:3px 6px;border:0.5px solid #ccc;text-align:center;">${Math.round(_jrM1*g.pct)}</td>
+            <td style="padding:3px 6px;border:0.5px solid #ccc;text-align:center;">${Math.round(_jrM2*g.pct)}</td>
+            <td style="padding:3px 6px;border:0.5px solid #ccc;text-align:center;">${Math.round(_jrM3*g.pct)}</td>
+            <td style="padding:3px 6px;border:0.5px solid #ccc;text-align:center;font-weight:700;">${Math.round(_ch*g.pct)}</td>
+            <td style="padding:3px 6px;border:0.5px solid #ccc;text-align:center;font-weight:700;">${Math.round(_sr*g.pct)}</td>
+            <td style="padding:3px 6px;border:0.5px solid #ccc;font-size:8.5px;">${g.action}</td>
+          </tr>`).join('')}
         </tbody>
       </table>
     </div>`;
@@ -1194,14 +1421,14 @@ function printTierSheet(){
 </head><body>
 <div style="border-bottom:3px solid #111;padding-bottom:8px;margin-bottom:10px;">
   <h1>DME Chasing Operations — Tier Reference Sheet</h1>
-  <div class="meta">Liberty Medical Supplies · ICO · Generated: ${dateStr} · Leads/Agent: ${L} · 45-Day Cycle</div>
+  <div class="meta">Liberty Medical Supplies · ICO · Generated: ${dateStr} · Leads/Agent: ${Lf}→${Lt} · 45-Day Cycle</div>
 </div>
 
-<div class="section-title">Conversion Tiers — All Roles (${L} leads per agent)</div>
-<div class="grid2">
-  ${buildRoleTable('jr','JR Chaser — Month 1→3','#333')}
-  ${buildRoleTable('ch','Chaser — Month 3+','#333')}
-  ${buildRoleTable('sr','SR Chaser — 6 months+','#333')}
+<div class="section-title">Conversion Tiers — All Roles (Leads: ${Lf} → ${Lt} per agent)</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+  ${buildRoleTable('jr','JR Chaser — Month 1→3')}
+  ${buildRoleTable('ch','Chaser — Month 3+')}
+  ${buildRoleTable('sr','SR Chaser — 6 months+')}
 </div>
 
 <div class="section-title">Recovery Plan — Targets by Seniority Tier</div>
@@ -1219,9 +1446,62 @@ ${conseqHTML}
 <div class="section-title">Operating Rules &amp; KPI Framework</div>
 ${rulesHTML}
 
-<div style="margin-top:10px;padding-top:6px;border-top:1px solid #ccc;font-size:8px;color:#777;display:flex;justify-content:space-between;">
+<div style="margin-top:10px;padding-top:6px;border-top:2px solid #111;font-size:8px;color:#777;display:flex;justify-content:space-between;">
   <span>DME Chasing Operations System · Liberty Medical Supplies / ICO</span>
   <span>Conv% = (DOs ÷ Leads Assigned) × 100 · Cycle: Day 1–45 · Reviews: Day 14 / Day 30 / Day 45</span>
+</div>
+
+<!-- TL WORKFLOW PAGE -->
+<div style="page-break-before:always;padding-top:4mm;">
+<div style="border-bottom:3px solid #111;padding-bottom:6px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end;">
+  <div>
+    <div style="font-size:14px;font-weight:900;letter-spacing:-0.02em;">Team Leader: Chasing Operational Workflow</div>
+    <div style="font-size:7.5px;color:#444;font-family:monospace;margin-top:2px;">Shift: 3:00 PM – 11:00 PM · Target: 25%–35% Conv% · Metric: (DO ÷ Total Actions) × 100</div>
+  </div>
+  <div style="text-align:right;font-size:7px;font-family:monospace;color:#333;line-height:1.7;">Liberty Medical Supplies / ICO<br/>45-Day Cycle System</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+  <div style="border:0.75px solid #888;padding:5px 7px;">
+    <div style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:#fff;background:#111;padding:2px 5px;margin-bottom:5px;">1 · Shift Rhythm &amp; Mandatory Checkpoints</div>
+    <div style="margin-bottom:4px;"><div style="font-size:7.5px;font-weight:800;border-bottom:0.4px solid #ddd;padding-bottom:1px;margin-bottom:2px;">Morning Review (Shift Start)</div><div style="font-size:7.2px;line-height:1.55;color:#222;">Attendance check + Yesterday Final DOs vs Target. <strong>Audit "Dead Leads":</strong> Review leads closed as "Dead" — ensure chasers did not kill them prematurely to avoid work.</div></div>
+    <div style="margin-bottom:4px;"><div style="font-size:7.5px;font-weight:800;border-bottom:0.4px solid #ddd;padding-bottom:1px;margin-bottom:2px;">Execution Audit</div><div style="font-size:7.2px;line-height:1.55;color:#222;">Open dashboard. Identify leads assigned >24h without First Touch. Check "No Movement" leads (stuck 3+ days).</div></div>
+    <div style="margin-bottom:4px;"><div style="font-size:7.5px;font-weight:800;border-bottom:0.4px solid #ddd;padding-bottom:1px;margin-bottom:2px;">Quality Control &amp; Coaching</div><div style="font-size:7.2px;line-height:1.55;color:#222;">Review 2–4 calls per chaser. Focus on Tier 3. Verify: doctor-patient relationship confirmed? Fax number recorded? Follow-up cadence respected?</div></div>
+    <div><div style="font-size:7.5px;font-weight:800;border-bottom:0.4px solid #ddd;padding-bottom:1px;margin-bottom:2px;">EOD Closing</div><div style="font-size:7.2px;line-height:1.55;color:#222;">Compile EOD Summary: Total Touches, Faxes, RXs received. Document coaching notes for weak performers. Set tomorrow priority list.</div></div>
+  </div>
+  <div style="border:0.75px solid #888;padding:5px 7px;">
+    <div style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:#fff;background:#111;padding:2px 5px;margin-bottom:5px;">2 · Operational Red Flags &amp; Stuck Status Audit</div>
+    <div style="margin-bottom:5px;"><div style="font-size:7.5px;font-weight:800;border-bottom:0.4px solid #ddd;padding-bottom:1px;margin-bottom:2px;">The "Stuck Status" Protocol</div><div style="font-size:7.2px;line-height:1.55;color:#222;"><strong>Condition:</strong> Lead in "Receipt Confirmed" >5 days without moving to "RX Received" or "Escalated".<br/><strong>TL Action:</strong> Investigate immediately. If fax confirmed received, chaser must call Dr. Office and push for signature. Verify 48h follow-up grace.</div></div>
+    <div style="font-size:7.5px;font-weight:800;margin-bottom:3px;">Daily Critical Audit List</div>
+    <div style="display:flex;flex-direction:column;gap:2px;">
+      <div style="padding:2px 4px;border-left:2.5px solid #111;font-size:7.2px;line-height:1.45;"><strong>Untouched >48h:</strong> Automatic Level 1 Warning. Every lead must have First Touch within 24–48h.</div>
+      <div style="padding:2px 4px;border-left:2.5px solid #555;font-size:7.2px;line-height:1.45;"><strong>Fax Latency:</strong> "Mutuality Confirmed" but no "Fax Sent" timestamp within same shift.</div>
+      <div style="padding:2px 4px;border-left:2.5px solid #888;font-size:7.2px;line-height:1.45;"><strong>Grace Period Check:</strong> After fax sent, verify follow-up every 48 hours until RX returned or escalated.</div>
+    </div>
+  </div>
+</div>
+<div style="border:0.75px solid #888;padding:5px 7px;margin-bottom:8px;">
+  <div style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:#fff;background:#111;padding:2px 5px;margin-bottom:5px;">3 · Consequences &amp; Accountability Workflow</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;">
+    <div style="border:0.5px solid #bbb;padding:4px 5px;"><div style="font-size:7.5px;font-weight:900;border-bottom:0.5px solid #ccc;padding-bottom:1px;margin-bottom:3px;">LEVEL 1 — Verbal</div><div style="font-size:7px;font-weight:800;margin-bottom:1px;">Trigger:</div><div style="font-size:7px;line-height:1.45;color:#222;margin-bottom:3px;">Missed first-touch (>48h) or 1st late follow-up.</div><div style="font-size:7px;font-weight:800;margin-bottom:1px;">Action:</div><div style="font-size:7px;line-height:1.45;color:#222;">Corrective conversation. TL documents missed lead + timestamp as warning of negligence.</div></div>
+    <div style="border:0.5px solid #bbb;padding:4px 5px;"><div style="font-size:7.5px;font-weight:900;border-bottom:0.5px solid #ccc;padding-bottom:1px;margin-bottom:3px;">LEVEL 2 — Written</div><div style="font-size:7px;font-weight:800;margin-bottom:1px;">Trigger:</div><div style="font-size:7px;line-height:1.45;color:#222;margin-bottom:3px;">Repeating Level 1 same week or negligent "No Movement".</div><div style="font-size:7px;font-weight:800;margin-bottom:1px;">Action:</div><div style="font-size:7px;line-height:1.45;color:#222;">Formal written warning. Issued if chaser ignores workflow steps (confirmed mutuality but failed to fax).</div></div>
+    <div style="border:0.5px solid #bbb;padding:4px 5px;"><div style="font-size:7.5px;font-weight:900;border-bottom:0.5px solid #ccc;padding-bottom:1px;margin-bottom:3px;">LEVEL 3 — 14-Day PIP</div><div style="font-size:7px;font-weight:800;margin-bottom:1px;">Trigger:</div><div style="font-size:7px;line-height:1.45;color:#222;margin-bottom:3px;">Low Conv% vs Target + continued weak discipline.</div><div style="font-size:7px;font-weight:800;margin-bottom:1px;">Action:</div><div style="font-size:7px;line-height:1.45;color:#222;">PIP activated. TL monitors daily 2 weeks. No growth in 14 days → Termination review.</div></div>
+    <div style="border:1px solid #111;padding:4px 5px;background:#f4f4f4;"><div style="font-size:7.5px;font-weight:900;border-bottom:0.5px solid #999;padding-bottom:1px;margin-bottom:3px;">LEVEL 4 — Exit</div><div style="font-size:7px;font-weight:800;margin-bottom:1px;">Trigger:</div><div style="font-size:7px;line-height:1.45;color:#222;margin-bottom:3px;">No improvement after PIP or repeated lead waste.</div><div style="font-size:7px;font-weight:800;margin-bottom:1px;">Action:</div><div style="font-size:7px;line-height:1.45;color:#222;">Full performance review and exit. Chaser identified as mismatch due to continued lack of ownership.</div></div>
+  </div>
+</div>
+<div style="border:1.5px solid #111;padding:6px 10px;background:#f9f9f9;">
+  <div style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:5px;">TL Mission Perspective</div>
+  <div style="font-size:7.5px;line-height:1.65;color:#111;margin-bottom:5px;">Your role is not merely to track numbers — it is to <strong>prevent neglect</strong>. A successful chaser is, above all, a disciplined chaser. Any lead left untouched for 48 hours represents a <strong>direct financial loss</strong> to the organization. Your primary focus must always be three mechanical questions:</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;">
+    <div style="border:1px solid #111;padding:5px 7px;text-align:center;background:#111;color:#fff;"><div style="font-size:8.5px;font-weight:900;">Was the fax sent?</div></div>
+    <div style="border:1px solid #111;padding:5px 7px;text-align:center;"><div style="font-size:8.5px;font-weight:900;">Did the office receive it?</div></div>
+    <div style="border:1px solid #111;padding:5px 7px;text-align:center;background:#f0f0f0;"><div style="font-size:8.5px;font-weight:900;">Was follow-up done every 48h?</div></div>
+  </div>
+  <div style="font-size:7.5px;line-height:1.6;color:#333;margin-top:5px;">If these three steps are executed correctly, achieving <strong>35% conversion becomes a natural outcome of the system</strong> — not a miracle.</div>
+</div>
+<div style="margin-top:6px;padding-top:4px;border-top:1px solid #ccc;font-size:7px;color:#777;display:flex;justify-content:space-between;font-family:monospace;">
+  <span>TL Workflow Reference · DME Chasing System · Liberty Medical Supplies / ICO</span>
+  <span>Metric: (DO ÷ Total Actions) × 100 · Target: 25%–35% · Shift: 3:00 PM – 11:00 PM</span>
+</div>
 </div>
 </body></html>`;
 
@@ -1232,15 +1512,64 @@ ${rulesHTML}
   win.onload=()=>{win.focus();win.print();};
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  // Init S5 tiers
-  calcS5();
-
-  // Init S11 calc
+// ═══════════════════════════════════════════════
+// RESET / LOAD AVG
+// ═══════════════════════════════════════════════
+window.resetCalc = function(){
+  ['c-do-target-from','c-do-target','c-jr','c-ch','c-sr',
+   'c-leads-from','c-leads-to','c-do-agent-from','c-do-agent-to'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.value='0';}
+  });
   calcTeam();
+};
 
-  // Init S12 escalation
-  calcS12();
+window.loadAvg = function(){
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v;};
+  set('c-do-target-from','200'); set('c-do-target','300');
+  set('c-jr','5');  set('c-ch','7');  set('c-sr','3');
+  set('c-leads-from','60'); set('c-leads-to','80');
+  set('c-do-agent-from','15'); set('c-do-agent-to','20');
+  calcTeam();
+};
+
+// ═══════════════════════════════════════════════
+// TOOLTIP WIRING (shared across slides)
+// ═══════════════════════════════════════════════
+function wireTooltips(){
+  document.querySelectorAll('.c-tip').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+      const box=document.getElementById('calc-tooltip-box');
+      if(box) box.innerHTML=`<span style="color:var(--text)">${el.dataset.tip}</span>`;
+    });
+    el.addEventListener('mouseleave',()=>{
+      const box=document.getElementById('calc-tooltip-box');
+      if(box) box.innerHTML='Hover ? icons to see what each field calculates.';
+    });
+  });
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  wireTooltips();
+
+  // Sync S4 leads range → S10 leads range on change
+  ['s5-leads-from','s5-leads-to'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    el.addEventListener('input',()=>{
+      const fromVal=document.getElementById('s5-leads-from').value;
+      const toVal=document.getElementById('s5-leads-to').value;
+      const cf=document.getElementById('c-leads-from');
+      const ct=document.getElementById('c-leads-to');
+      if(cf)cf.value=fromVal;
+      if(ct)ct.value=toVal;
+      try{calcTeam();}catch(e){}
+    });
+  });
+
+  try{calcS5();}catch(e){console.warn('calcS5 error:',e);}
+  try{calcTeam();}catch(e){console.warn('calcTeam error:',e);}
+  try{calcS12();}catch(e){console.warn('calcS12 error:',e);}
 });
 
 document.getElementById('bg').style.background=THEMES['stone'];
